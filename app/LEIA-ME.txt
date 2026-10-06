@@ -1,70 +1,46 @@
-SEU PRÓPRIO CHEFE?
+SEU PRÓPRIO CHEFE? — MOTORISTA POR UM DIA EM BELO HORIZONTE
 
-Jogo educativo sobre um dia de entregas, com quatro decisões, conta detalhada,
-provocações e votação antes/depois. Todo o produto é frontend estático: HTML,
-CSS e JavaScript. O site não depende de serviços externos para funcionar.
+COMO JOGAR
+1. Clique em Jogar com a turma ou Jogar sozinho.
+2. Escolha as horas no aplicativo, o tempo sem corrida e os quilômetros totais.
+3. Veja a conta: entrou nas corridas, saiu em custos e ficou para você.
+4. Use Usar meus valores para informar ganhos e despesas do motorista.
+5. Abra os temas Autonomia, Tempo, Custos e Proteção para debater.
+Cada escolha avança automaticamente. As teclas 1, 2 e 3 também escolhem.
+Projete e ouça a sala antes de clicar. Cada navegador tem seu próprio jogo.
 
-RODAR
-Para jogar sem internet e sem instalar nada, abra no navegador:
-  ../output/JOGAR-SEM-INTERNET.html
-Essa versão contém o jogo inteiro em um único arquivo e também pode ser enviada
-para os colegas. Ela é gerada do mesmo código da versão online em cada build.
+REFERÊNCIAS
+Gasolina comum em BH: R$ 6,42/l, ANP, 27/09 a 03/10/2026, 41 postos.
+Consumo: Onix MT 1.0, 13,5 km/l na cidade, Inmetro, tabela PBEV de janeiro de 2026.
+Ganhos: R$ 47/h em viagem, referência nacional Cebrap/Amobitec com dados de
+maio/2023 a abril/2024. Já desconta a taxa do aplicativo. Não desconta o veículo.
+A pesquisa foi encomendada pela associação empresarial Amobitec.
 
-Na pasta app, execute:
-  npm start
+A espera reduz as horas que geram ganhos estimados. Os quilômetros totais
+determinam o combustível. Os cenários não representam médias locais observadas.
+Os ganhos históricos não foram atualizados pela inflação, não são tarifa oficial
+da Uber e não garantem renda em BH. Use o repasse real quando disponível.
+Outros custos começam em zero; o resultado inicial é após gasolina, não lucro completo.
+O formulário permite informar manutenção, seguro, IPVA, aluguel, desgaste e outros.
+Não some a gasolina de novo nesses outros custos. A taxa do app não é descontada outra vez.
+Fontes, metodologia e links: ../output/FONTES-DOS-VALORES.md e botão Fontes no jogo.
+
+RODAR E PUBLICAR
+Na pasta app: npm ci, npm run build e npm start.
 Abra http://localhost:4173.
-Para iniciar em segundo plano no Windows, execute pelo PowerShell:
-  powershell -ExecutionPolicy Bypass -File scripts/start-local.ps1
-
-PUBLICAR NO NETLIFY
-  npm run build
-A pasta dist é a versão pronta para publicar. O netlify.toml já configura
-o comando de build e a pasta de publicação. Também é possível enviar a pasta
-dist para https://app.netlify.com/drop.
-
-USAR NA AULA
-1. Abra o jogo e escolha "Conduzir com a turma".
-2. Use "Tela cheia" (ou F11 no navegador).
-3. Peça uma votação por mãos levantadas e registre as quantidades.
-4. Ouça a turma, selecione uma escolha e confirme cada uma das quatro rodadas.
-5. Leia as provocações ao revelar os resultados. As teclas 1–3 escolhem e
-   Enter confirma quando uma opção está selecionada.
-6. Na conta final, compare o afastamento com e sem apoio e explore os quatro
-   temas de debate.
-7. Registre a votação final e compare com o início.
-
-Cada navegador tem uma partida independente. O modo turma registra a votação
-manualmente no computador do apresentador; não há coleta simultânea de celulares.
-O progresso fica guardado apenas no navegador para poder continuar após recarregar.
-Se o navegador não permitir salvar, o jogo avisa e continua funcionando nessa aba.
-Ao compartilhar, o endereço pode ser selecionado manualmente se a cópia automática
-for bloqueada. Na versão offline, compartilhe o arquivo HTML.
-"Recomeçar" pede confirmação e apaga as escolhas e votações daquela partida.
-
-VALORES E CONCEITOS
-Todos os valores são fictícios, com regras visíveis antes das decisões. Não são
-dados reais do entregador entrevistado nem uma amostra estatística da categoria.
-O modelo separa receita, despesas de trabalho, saldo, jornada e proteção hipotética.
-As consequências não são aleatórias e não pressupõem punição por recusar entregas.
-
-Referência: ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael.
-Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas.
-Sociologias, v. 23, n. 57, p. 26-56, 2021.
-https://doi.org/10.1590/15174522-116484
-
-O jogo usa a análise sociológica do artigo, sem expor a legislação atual,
-diagnosticar saúde mental ou afirmar ausência universal de proteção.
+No Windows, para iniciar em segundo plano:
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local.ps1
+Para jogar sem instalar nada ou sem internet, abra ../output/JOGAR-SEM-INTERNET.html.
+O build gera esse arquivo e os seis arquivos públicos da pasta dist.
+Conecte o repositório ao Netlify ou envie app/dist pelo Netlify Drop.
 
 VERIFICAR
   npm test
+  npm run build
   node scripts/browser-check.mjs
-  node scripts/interface-check.mjs
-  node scripts/improvements-check.mjs
-  node scripts/artifact-check.mjs
-O teste de navegador usa o Chrome instalado no Windows. O parâmetro opcional
-do script permite testar a versão publicada: node scripts/browser-check.mjs URL.
-O artifact-check confere os arquivos publicados e o download offline da publicação
-registrada em .netlify/deployment.json; esse arquivo de acesso fica só no computador.
-
-As dependências de desenvolvimento servem aos testes. O app publicado é composto
-apenas pelos seis arquivos estáticos de dist, incluindo a cópia offline.
+O teste de navegador precisa do servidor local ativo e usa o Chrome no caminho
+padrão do Windows. Aceita uma URL para conferir uma publicação.
+Os cinco testes de cálculo cobrem 27 combinações, precisão, tempo sem corrida,
+repasse real, custos adicionais, zero recebido, prejuízo e recuperação de estado.
+A interface verifica as três escolhas, formulário, teclado, tela cheia, retomada,
+celulares, falhas de armazenamento/cópia e funcionamento offline sem requisições HTTP.

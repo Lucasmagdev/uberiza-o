@@ -2,151 +2,130 @@ import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const base = process.argv[2] || 'http://localhost:4173';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const base = process.argv[2] || 'http://localhost:4173';
 const folder = path.join(root, 'tmp/qa');
 await fs.mkdir(folder, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
-const errors = [];
-const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-const page = await context.newPage();
-page.on('pageerror', (e) => errors.push(e.message));
-const report = [];
-let deployment;
-try { deployment = JSON.parse(await fs.readFile(path.join(root, '.netlify/deployment.json'), 'utf8')); } catch { /* Local tests do not need a deployment. */ }
-async function navigate(target) {
-  await target.goto(base);
-  if (await target.locator('input[type="password"][name="password"]').count()) {
-    assert.ok(deployment?.password && new URL(base).hostname === new URL(deployment.site_url).hostname, 'Deployment password unavailable for this site');
-    await target.locator('input[type="password"][name="password"]').fill(deployment.password);
-    await target.getByRole('button', { name: 'Submit', exact: true }).click();
+const reports = [], errors = [];
+async function navigate(page) {
+  await page.goto(base);
+  if (await page.locator('input[type=password]').count()) {
+    const d = JSON.parse(await fs.readFile(path.join(root, '.netlify/deployment.json'), 'utf8'));
+    assert.equal(new URL(base).hostname, new URL(d.site_url).hostname);
+    await page.locator('input[type=password]').fill(d.password);
+    await page.getByRole('button', { name: 'Submit', exact: true }).click();
   }
-  await target.getByRole('button', { name: 'Começar meu dia', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Jogar sozinho', exact: true }).waitFor();
 }
-async function checkLayout(label) {
-  const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, width: window.innerWidth }));
-  assert.ok(dimensions.scroll <= dimensions.width + 1, `${label}: horizontal overflow`);
+async function choose(page, values = [8, 20, 180]) { for (const v of values) await page.locator(`[data-action=choose][data-value="${v}"]`).click(); }
+async function layout(page) { assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Horizontal overflow'); }
+async function fresh(width = 1440, setup) {
+  const c = await browser.newContext({ viewport: { width, height: width < 760 ? 844 : 1000 }, permissions: ['clipboard-read', 'clipboard-write'] });
+  if (setup) await c.addInitScript(setup);
+  const p = await c.newPage();
+  p.on('pageerror', (e) => errors.push(e.message));
+  await navigate(p);
+  return [c, p];
 }
-async function snapshot(name) { await page.screenshot({ path: path.join(folder, name + '.png'), fullPage: true }); }
-async function finishRound(title, expectedNext) {
-  await page.getByRole('button', { name: title, exact: false }).click();
-  await page.getByRole('button', { name: 'Confirmar escolha', exact: true }).click();
-  assert.equal(await page.getByText('PARA PENSAR', { exact: true }).count(), 1);
-  await page.getByRole('button', { name: expectedNext, exact: true }).click();
-}
-
 try {
-  await navigate(page);
-  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-  await page.getByRole('button', { name: 'Começar meu dia', exact: true }).waitFor();
-  await checkLayout('desktop intro');
-  await snapshot('01-desktop-intro');
-  await page.getByRole('button', { name: 'Sobre', exact: true }).click();
-  await page.getByRole('dialog').waitFor();
-  assert.ok((await page.getByRole('dialog').innerText()).includes('Os valores são fictícios'));
+  let [context, page] = await fresh();
+  await page.screenshot({ path: path.join(folder, 'driver-intro.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Fontes', exact: true }).click();
+  const source = await page.getByRole('dialog').innerText();
+  assert.ok(source.includes('maio/2023 a abril/2024') && source.includes('41 postos') && source.includes('13,5 km/l'));
   await page.getByRole('button', { name: 'Entendi', exact: true }).click();
-  report.push('Introdução e referência conceitual acessíveis.');
-
-  await page.getByRole('button', { name: 'Começar meu dia', exact: true }).click();
-  assert.equal(await page.getByRole('button', { name: 'Vamos trabalhar', exact: true }).isDisabled(), true);
-  await page.getByRole('button', { name: '02 Em parte', exact: false }).click();
-  await page.getByRole('button', { name: 'Vamos trabalhar', exact: true }).click();
+  await page.getByRole('button', { name: 'Jogar com a turma', exact: false }).click();
+  assert.equal(await page.getByRole('spinbutton').count(), 0);
   await page.getByRole('button', { name: /8 horas/ }).click();
-  await snapshot('02-desktop-round');
-  await page.keyboard.press('Enter');
-  await page.getByText('PARA PENSAR', { exact: true }).waitFor();
-  await page.getByRole('button', { name: 'Próxima decisão', exact: true }).click();
+  await page.locator('#main').dispatchEvent('keydown', { key: '2', repeat: true, bubbles: true });
+  assert.ok((await page.locator('h1').innerText()).includes('sem corrida'));
+  await page.getByRole('button', { name: 'Voltar uma escolha', exact: true }).click();
+  await page.getByRole('button', { name: /8 horas/ }).click();
   await page.reload();
-  assert.ok((await page.locator('h1').innerText()).includes('O pedido ainda não está pronto'));
-  report.push('Voto inicial, escolha por teclado e retomada após recarregar.');
-
-  await finishRound('Esperar o pedido', 'Próxima decisão');
-  await finishRound('Continuar por 2 horas', 'Próxima decisão');
-  await finishRound('Cenário sem apoio', 'Ver minha conta');
-  assert.equal(await page.locator('.result-net > strong').innerText(), 'R$\u00a0166,00');
-  assert.ok((await page.locator('.result-net > p').innerText()).includes('11,5 h'));
-  assert.ok((await page.locator('.away-panel > h2').innerText()).includes('14,00'));
-  await checkLayout('desktop result');
-  await snapshot('03-desktop-result');
-  await page.getByRole('button', { name: 'Com apoio hipotético', exact: true }).click();
-  assert.equal(await page.locator('.away-panel > h2').innerText(), 'As despesas estariam cobertas.');
-  assert.equal(await page.locator('.result-net > strong').innerText(), 'R$\u00a0166,00');
-  await page.getByRole('button', { name: 'Consumo', exact: true }).click();
-  assert.ok((await page.locator('.debate-section h2').innerText()).includes('rápida e barata'));
-  report.push('Partida completa: R$ 166,00 em 11,5 h; apoio muda proteção, preservando rendimento.');
-
-  await page.getByRole('button', { name: 'Responder de novo', exact: true }).click();
-  await page.getByRole('button', { name: '03 Não', exact: false }).click();
-  await page.getByRole('button', { name: 'Comparar respostas', exact: true }).click();
-  assert.equal(await page.locator('.vote-chart').count(), 2);
-  await snapshot('04-desktop-reflection');
-  await page.getByRole('button', { name: 'Jogar novamente', exact: true }).click();
+  assert.ok((await page.locator('h1').innerText()).includes('sem corrida'));
+  await page.screenshot({ path: path.join(folder, 'driver-wait.png'), fullPage: true });
+  await page.locator('[data-action=choose][data-value="20"]').click();
+  await page.locator('[data-action=choose][data-value="180"]').click();
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0215,20');
+  assert.ok((await page.locator('.result-heading').innerText()).includes('6h24'));
+  assert.ok((await page.locator('.cost-alert').innerText()).includes('ainda não é o lucro completo'));
+  await page.screenshot({ path: path.join(folder, 'driver-result.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Usar meus valores', exact: true }).click();
+  await page.locator('[name=actualIncome]').fill('300');
+  await page.locator('[name=otherCosts]').fill('30');
+  await page.getByRole('button', { name: 'Calcular com esses valores', exact: true }).click();
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0184,40');
+  await page.reload();
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0184,40');
+  await page.getByRole('button', { name: 'Usar meus valores', exact: true }).click();
+  await page.locator('[name=actualIncome]').fill('0');
+  await page.getByRole('button', { name: 'Calcular com esses valores', exact: true }).click();
+  assert.equal(await page.locator('.result-net').innerText(), '-R$\u00a0115,60');
+  await page.getByRole('button', { name: 'Usar meus valores', exact: true }).click();
+  await page.locator('.advanced-settings summary').click();
+  await page.locator('[name=efficiency]').fill('0');
+  await page.getByRole('button', { name: 'Calcular com esses valores', exact: true }).click();
+  assert.equal(await page.getByRole('dialog').count(), 1);
+  await page.keyboard.press('Escape');
+  for (const title of ['Autonomia', 'Tempo', 'Custos', 'Proteção']) await page.getByRole('button', { name: title, exact: true }).click();
+  await page.getByRole('button', { name: 'Compartilhar o jogo', exact: true }).click();
+  assert.ok((await page.locator('#toast').innerText()).includes('Link copiado'));
+  await page.locator('.brand').click();
   await page.getByRole('button', { name: 'Continuar esta partida', exact: true }).click();
-  assert.ok((await page.locator('h1').innerText()).includes('A mesma pergunta'));
-  await page.getByRole('button', { name: 'Jogar novamente', exact: true }).click();
-  await page.getByRole('button', { name: 'Recomeçar', exact: true }).last().click();
-  report.push('Votação final, comparação e confirmação de reinício.');
-
-  await page.getByRole('button', { name: 'Conduzir com a turma', exact: true }).click();
-  await page.getByRole('spinbutton', { name: 'Votos em Sim', exact: true }).fill('8');
-  await page.getByRole('spinbutton', { name: 'Votos em Em parte', exact: true }).fill('12');
-  await page.getByRole('spinbutton', { name: 'Votos em Não', exact: true }).fill('10');
-  assert.ok((await page.locator('.vote-count').innerText()).includes('30 respostas'));
-  await page.getByRole('button', { name: 'Vamos trabalhar', exact: true }).click();
-  await page.getByRole('button', { name: /6 horas/ }).click();
-  await page.getByRole('button', { name: 'Confirmar escolha', exact: true }).click();
-  await page.getByRole('button', { name: 'Mudar esta escolha', exact: true }).click();
-  await page.getByRole('button', { name: /12 horas/ }).click();
-  await page.getByRole('button', { name: 'Confirmar escolha', exact: true }).click();
-  assert.ok((await page.locator('.receipt-total').innerText()).includes('162,00'));
-  await page.getByRole('button', { name: 'Próxima decisão', exact: true }).click();
-  await page.getByRole('button', { name: 'Voltar', exact: true }).click();
-  assert.ok((await page.locator('h1').innerText()).includes('Quanto tempo'));
-  await page.getByRole('button', { name: 'Confirmar escolha', exact: true }).click();
-  await page.getByRole('button', { name: 'Próxima decisão', exact: true }).click();
-  await finishRound('Buscar outra entrega', 'Próxima decisão');
-  await finishRound('Encerrar e descansar', 'Próxima decisão');
-  await finishRound('Cenário com apoio', 'Ver minha conta');
-  await page.getByRole('button', { name: 'Responder de novo', exact: true }).click();
-  await page.getByRole('spinbutton', { name: 'Votos em Sim', exact: true }).fill('3');
-  await page.getByRole('spinbutton', { name: 'Votos em Em parte', exact: true }).fill('15');
-  await page.getByRole('spinbutton', { name: 'Votos em Não', exact: true }).fill('12');
-  await page.getByRole('button', { name: 'Comparar respostas', exact: true }).click();
-  assert.ok((await page.locator('.vote-chart').first().innerText()).includes('40%'));
-  assert.ok((await page.locator('.vote-chart').last().innerText()).includes('50%'));
-  report.push('Modo turma: 30 votos, correção de escolhas, retorno de rodada e comparação final.');
-
-  for (const size of [{ width: 390, height: 844 }, { width: 320, height: 740 }, { width: 1920, height: 1080 }]) {
-    const mobile = await browser.newContext({ viewport: size });
-    const p = await mobile.newPage();
-    p.on('pageerror', (e) => errors.push(e.message));
-    await navigate(p);
-    await p.getByRole('button', { name: 'Começar meu dia', exact: true }).waitFor();
-    assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-    await p.screenshot({ path: path.join(folder, `05-intro-${size.width}.png`), fullPage: true });
-    await p.getByRole('button', { name: 'Começar meu dia', exact: true }).click();
-    await p.getByRole('button', { name: '01 Sim', exact: false }).click();
-    await p.getByRole('button', { name: 'Vamos trabalhar', exact: true }).click();
-    assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-    await p.screenshot({ path: path.join(folder, `06-round-${size.width}.png`), fullPage: true });
-    for (let i = 0; i < 4; i++) {
-      await p.locator('[data-action="choose"]').first().click();
-      await p.getByRole('button', { name: 'Confirmar escolha', exact: true }).click();
-      await p.locator('[data-action="next-round"]').click();
-    }
-    assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-    await p.screenshot({ path: path.join(folder, `07-result-${size.width}.png`), fullPage: true });
-    await mobile.close();
+  assert.equal(await page.locator('.result-net').count(), 1);
+  await page.getByRole('button', { name: 'Tela cheia', exact: true }).click();
+  assert.equal(await page.evaluate(() => !!document.fullscreenElement), true);
+  await page.getByRole('button', { name: 'Tela cheia', exact: true }).click();
+  reports.push('Three choices complete the classroom flow without voting fields; real data, costs, zero earnings, reload, validation, debates, sharing and fullscreen work.');
+  await context.close();
+  for (const width of [320, 390, 720, 1920]) {
+    [context, page] = await fresh(width);
+    await layout(page);
+    await page.getByRole('button', { name: 'Jogar sozinho', exact: true }).click();
+    for (const v of [8, 20, 180]) { await layout(page); await page.locator(`[data-action=choose][data-value="${v}"]`).click(); }
+    await layout(page);
+    await page.getByRole('button', { name: 'Usar meus valores', exact: true }).click();
+    await layout(page);
+    assert.ok(await page.getByRole('dialog').evaluate((el) => el.scrollWidth <= el.clientWidth + 1));
+    await page.keyboard.press('Escape');
+    await page.locator('#main').focus();
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: path.join(folder, `driver-result-${width}.png`), fullPage: true });
+    await context.close();
   }
-  report.push('Sem rolagem horizontal em 320 px, 390 px e 1920 px; partida funcional nessas telas.');
+  reports.push('No horizontal overflow at 320, 390, 720 and 1920 pixels, including the real-values form.');
+  [context, page] = await fresh(1440, () => { Object.defineProperty(Storage.prototype, 'setItem', { value() { throw new DOMException('Denied'); } }); Object.defineProperty(navigator, 'clipboard', { value: { writeText: async () => { throw new DOMException('Denied'); } } }); });
+  await page.getByRole('button', { name: 'Jogar sozinho', exact: true }).click();
+  await choose(page);
+  assert.equal(await page.locator('#storage-note').count(), 1);
+  await page.getByRole('button', { name: 'Compartilhar o jogo', exact: true }).click();
+  assert.ok((await page.getByRole('textbox', { name: 'Endereço do jogo', exact: true }).inputValue()).startsWith('http'));
+  await context.close();
+  reports.push('Blocked storage and clipboard have working fallbacks.');
+  context = await browser.newContext({ offline: true, viewport: { width: 390, height: 844 } });
+  page = await context.newPage();
+  page.on('pageerror', (e) => errors.push(e.message));
+  const network = [];
+  page.on('request', (r) => { if (r.url().startsWith('http')) network.push(r.url()); });
+  await page.goto(pathToFileURL(path.join(root, 'dist/jogo-offline.html')).href);
+  await page.getByRole('button', { name: 'Jogar com a turma', exact: false }).click();
+  await page.keyboard.press('2'); await page.keyboard.press('2'); await page.keyboard.press('2');
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0215,20');
+  await page.getByRole('button', { name: 'Usar meus valores', exact: true }).click();
+  await page.locator('[name=actualIncome]').fill('300');
+  await page.locator('[name=otherCosts]').fill('30');
+  await page.getByRole('button', { name: 'Calcular com esses valores', exact: true }).click();
+  await page.reload();
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0184,40');
+  await layout(page);
+  assert.deepEqual(network, []);
+  await context.close();
   assert.deepEqual(errors, []);
-  report.push('Nenhum erro de JavaScript ou console.');
-  await fs.writeFile(path.join(folder, 'browser-report.json'), JSON.stringify({ base, passed: true, checks: report, errors }, null, 2));
-  console.log(JSON.stringify({ passed: true, base, checks: report, screenshots: folder }));
-} catch (e) {
-  await page.screenshot({ path: path.join(folder, 'failure.png'), fullPage: true });
-  console.error('Browser check failed:', e.message);
-  process.exitCode = 1;
-} finally { await browser.close(); }
+  reports.push('Offline game completes with keyboard, real inputs and reload, with no HTTP requests or JavaScript errors.');
+  const report = { passed: true, base, checks: reports, errors };
+  await fs.writeFile(path.join(folder, 'browser-report.json'), JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report));
+} catch (error) { console.error(error.message); process.exitCode = 1; }
+finally { await browser.close(); }

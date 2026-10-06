@@ -1,8 +1,8 @@
 # Seu Próprio Chefe?
 
-Jogo educativo e materiais de uma apresentação sobre uberização e plataformização do trabalho no Brasil. A turma decide quatro situações de um dia de entregas, compara receita, custos e tempo e debate autonomia e proteção.
+Jogo educativo e materiais de uma apresentação sobre uberização e plataformização do trabalho no Brasil. A turma simula um dia como motorista em Belo Horizonte com três escolhas: jornada, tempo sem corrida e quilômetros rodados.
 
-O jogo é feito em HTML, CSS e JavaScript. Os valores da simulação são fictícios, com regras visíveis. A base conceitual é o artigo de Abílio, Amorim e Grohmann (2021).
+O jogo é feito em HTML, CSS e JavaScript. A tela final mostra **entrou − custos = ficou**, com opção de usar valores reais do motorista. As referências são ANP, Inmetro e Cebrap/Amobitec, com datas e limites explicados em [Fontes dos valores](output/FONTES-DOS-VALORES.md). A base conceitual é o artigo de Abílio, Amorim e Grohmann (2021).
 
 ## Rodar localmente
 
@@ -35,13 +35,15 @@ O comando de build também cria `output/JOGAR-SEM-INTERNET.html`. Abra esse arqu
 
 ## Usar com a turma
 
-1. Selecione **Conduzir com a turma** e projete a tela.
-2. Registre a votação inicial por mãos levantadas.
-3. Ouça a sala, confirme as quatro decisões e leia as provocações.
-4. Compare a conta final e os cenários de afastamento.
-5. Registre a votação final e discuta o que mudou.
+1. Selecione **Jogar com a turma** e projete a tela.
+2. Ouça a sala e clique em uma opção de jornada, espera e distância.
+3. Compare os ganhos, o combustível e o valor após os custos informados.
+4. Em **Usar meus valores**, informe o repasse e os custos do motorista.
+5. Explore as provocações sobre autonomia, tempo, custos e proteção.
 
-Cada navegador tem uma partida independente. O modo turma registra votos manualmente no computador do apresentador. As respostas não são sincronizadas entre celulares. O progresso fica no navegador quando o armazenamento está disponível.
+Cada navegador tem uma partida independente. O apresentador clica após ouvir a sala. O progresso fica no navegador quando o armazenamento está disponível.
+
+Os ganhos iniciais usam uma referência nacional histórica por hora **em corrida**, sem remunerar a espera. O preço do combustível é de BH e o consumo inicial é de laboratório. Outros custos começam em zero e a tela avisa que o valor após gasolina ainda não é lucro completo. A taxa do aplicativo já foi descontada do indicador de ganhos e não é retirada novamente.
 
 ## Materiais da apresentação
 
@@ -63,11 +65,9 @@ Com o servidor ativo, execute em outro terminal:
 
 ```sh
 node scripts/browser-check.mjs
-node scripts/interface-check.mjs
-node scripts/improvements-check.mjs
 ```
 
-Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` e `improvements-check` aceitam uma URL como argumento para verificar uma publicação. Os testes de cálculo cobrem as 24 combinações de decisões. Os testes de interface verificam partidas individuais e coletivas, votações, retomada, teclado e a versão offline.
+Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` aceita uma URL como argumento para verificar uma publicação. Os testes de cálculo cobrem as 27 combinações, valores recebidos reais, despesas adicionais, espera e resultados negativos. A verificação de interface inclui as três escolhas, formulário, retomada, teclado, tela cheia e versão offline. Os comandos antigos `interface-check` e `improvements-check` chamam a verificação consolidada.
 
 `scripts/artifact-check.mjs` verifica os arquivos de uma publicação registrada localmente em `app/.netlify/deployment.json`. Esse registro e suas credenciais são privados e não fazem parte do repositório.
 

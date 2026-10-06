@@ -17,9 +17,9 @@ try {
     await page.locator('input[type=password]').fill(deployment.password);
     await page.getByRole('button', { name: 'Submit', exact: true }).click();
   }
-  await page.getByRole('button', { name: 'Começar meu dia', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Jogar sozinho', exact: true }).waitFor();
   const pendingDownload = page.waitForEvent('download');
-  await page.getByRole('link', { name: 'Baixar versão para jogar sem internet', exact: true }).click();
+  await page.getByRole('link', { name: 'Baixar para jogar sem internet', exact: true }).click();
   const download = await pendingDownload;
   assert.equal(await download.failure(), null);
   assert.equal(download.suggestedFilename(), 'JOGAR-SEM-INTERNET.html');

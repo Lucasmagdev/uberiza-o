@@ -1,280 +1,58 @@
-import { ROUNDS, DEBATES, VOTE_LABELS, money, hours, calculate, voteTotal, normalizeVotes, initialState, normalizeState } from './engine.js';
-
+import { DEFAULTS, STEPS, REFERENCES, DEBATES, money, number, hours, calculate, normalizeInputs, initialState, normalizeState } from './engine.js';
 const root = document.querySelector('#app');
-const STORAGE_KEY = 'seu-proprio-chefe-v1';
-const offline = window.location.protocol === 'file:';
+const STORAGE_KEY = 'seu-proprio-chefe-v2';
+const offline = location.protocol === 'file:';
 let storageAvailable = true;
+let saved = null;
+try { saved = localStorage.getItem(STORAGE_KEY); } catch { storageAvailable = false; }
 let state;
-let savedState = null;
-try { savedState = localStorage.getItem(STORAGE_KEY); } catch { storageAvailable = false; }
-try { state = normalizeState(JSON.parse(savedState)); } catch { state = initialState(); }
+try { state = normalizeState(JSON.parse(saved)); } catch { state = initialState(); }
 let toastTimer;
-
-const icon = (name) => {
-  const paths = {
-    question: '<path d="M9 9a3 3 0 1 1 5 2.2c-1.3.9-2 1.3-2 2.8"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>',
-    expand: '<path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/>',
-    reset: '<path d="M3 11a9 9 0 1 1 2.6 7M3 4v7h7"/>',
-    check: '<path d="m5 12 4 4L19 6"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-    share: '<path d="M12 16V3m-4 4 4-4 4 4M5 12v8h14v-8"/>',
-    book: '<path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/>',
-    close: '<path d="m6 6 12 12M6 18 18 6"/>',
-  };
-  return `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.question}</svg>`;
-};
-
-function save() {
-  if (!storageAvailable) return;
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-  catch {
-    storageAvailable = false;
-    const note = document.querySelector('#storage-note');
-    if (note) { note.hidden = false; note.textContent = 'Partida nesta aba: o navegador não permitiu salvar.'; }
-  }
-}
+const icon = (name) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${{ expand: '<path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/>', reset: '<path d="M3 11a9 9 0 1 1 2.6 7M3 4v7h7"/>', book: '<path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/>', close: '<path d="m6 6 12 12M6 18 18 6"/>', arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>' }[name] || ''}</svg>`;
+function save() { if (storageAvailable) try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { storageAvailable = false; } }
 function change(patch, focus = true) { Object.assign(state, patch); save(); render(focus); }
-
+function toast(message) { clearTimeout(toastTimer); const target = document.querySelector('#toast'); target.textContent = message; target.classList.add('visible'); toastTimer = setTimeout(() => target.classList.remove('visible'), 4000); }
 function header() {
-  const active = state.phase !== 'intro';
-  return `<header class="header">
-    <button class="brand" data-action="${active ? 'restart' : 'home'}" aria-label="Seu Próprio Chefe? Página inicial"><span class="brand-symbol">?</span><span>seu próprio<br><strong>chefe?</strong></span></button>
-    <div class="header-center">UM DIA DE ENTREGAS <span>·</span> QUATRO DECISÕES</div>
-    <nav class="tools" aria-label="Ferramentas do jogo">
-      ${active ? `<button class="tool" data-action="restart" aria-label="Recomeçar" title="Recomeçar">${icon('reset')}<span>Recomeçar</span></button>` : ''}
-      <button class="tool" data-action="fullscreen" aria-label="Tela cheia" title="Tela cheia (F)">${icon('expand')}<span>Tela cheia</span></button>
-      <button class="tool" data-action="sources" aria-label="Sobre" title="Sobre a simulação">${icon('book')}<span>Sobre</span></button>
-    </nav>
-  </header>`;
+  return `<header class="header"><button class="brand" data-action="${state.phase === 'intro' ? 'home' : 'restart'}" aria-label="Seu Próprio Chefe? Página inicial"><span class="brand-symbol">?</span><span>seu próprio<br><strong>chefe?</strong></span></button><span class="header-center">MOTORISTA POR UM DIA · BELO HORIZONTE</span><nav class="tools" aria-label="Ferramentas">${state.phase !== 'intro' ? `<button class="tool" data-action="restart" aria-label="Recomeçar">${icon('reset')}<span>Recomeçar</span></button>` : ''}<button class="tool" data-action="fullscreen" aria-label="Tela cheia">${icon('expand')}<span>Tela cheia</span></button><button class="tool" data-action="sources" aria-label="Fontes">${icon('book')}<span>Fontes</span></button></nav></header>`;
 }
-
-function footer() {
-  return `<footer class="footer"><span><span class="simulation-dot"></span>Valores fictícios para discussão em aula.</span><span>Inspirado em Abílio, Amorim e Grohmann (2021).</span><span id="storage-note" role="status" ${storageAvailable ? 'hidden' : ''}>${storageAvailable ? '' : 'Partida nesta aba: o navegador não permitiu salvar.'}</span></footer>`;
+function footer() { return `<footer class="footer"><span>Referências reais. Escolhas e resultado são uma simulação.</span><span>Abílio, Amorim e Grohmann (2021).</span>${!storageAvailable ? '<span id="storage-note" role="status">Partida nesta aba: o navegador não permitiu salvar.</span>' : ''}</footer>`; }
+function receipt() {
+  const a = calculate(state.inputs);
+  return `<aside class="receipt" aria-label="Prévia da conta"><div class="eyebrow">PRÉVIA DO SEU DIA</div><h2>Quanto fica<br>com você?</h2><strong class="receipt-total">${money(a.balance)}</strong><p class="muted">depois da gasolina e dos custos informados</p><dl class="ledger"><div><dt>Entrou nas corridas</dt><dd>${money(a.income)}</dd></div><div><dt>Gasolina</dt><dd>− ${money(a.fuel)}</dd></div>${a.otherCosts ? `<div><dt>Outros custos</dt><dd>− ${money(a.otherCosts)}</dd></div>` : ''}<div class="ledger-net"><dt>Ficou para você</dt><dd>${money(a.balance)}</dd></div></dl><p class="receipt-time">${hours(a.hours)} no aplicativo · ${number(a.km)} km<br>${hours(a.activeHours)} em corrida · ${hours(a.idleHours)} sem corrida</p><p class="small-note">${a.otherCosts ? 'Confira se você incluiu todos os custos do carro.' : 'Manutenção, seguro, IPVA e desgaste ainda não incluídos.'}</p></aside>`;
 }
-
-function receipt(choices = state.choices, preview = false) {
-  const a = calculate(choices);
-  const started = choices.length > 0;
-  return `<aside class="receipt" aria-label="Conta do dia${preview ? ', prévia da escolha' : ''}">
-    <div class="receipt-top"><span>CONTA DO DIA</span><span>${preview ? 'PRÉVIA' : 'SIMULAÇÃO'}</span></div>
-    <h2>${started ? 'O que sobra.' : 'A conta é sua.'}</h2>
-    <div class="receipt-total">${money(a.net)}</div>
-    <p class="receipt-sub">${started ? 'após os custos do trabalho' : 'o dia ainda não começou'}</p>
-    <div class="receipt-divider"></div>
-    <dl class="ledger">
-      <div><dt>Recebido em entregas e bônus</dt><dd>${money(a.gross)}</dd></div>
-      <div><dt>Combustível e custos variáveis</dt><dd>− ${money(a.variable)}</dd></div>
-      <div><dt>Custos fixos do dia</dt><dd>− ${money(a.fixed)}</dd></div>
-      <div class="ledger-net"><dt>Saldo do trabalho</dt><dd>${money(a.net)}</dd></div>
-    </dl>
-    <div class="receipt-divider"></div>
-    <div class="time-pair"><div><span>Tempo dedicado</span><strong>${hours(a.totalHours)}</strong></div><div><span>Rendimento / hora</span><strong>${money(a.hourly)}</strong></div></div>
-    ${a.wait ? `<p class="receipt-note">Inclui ${hours(a.wait)} de disponibilidade extra no imprevisto.</p>` : `<p class="receipt-note">Receita e saldo são coisas diferentes.</p>`}
-    <div class="receipt-bottom"><span>TRABALHO SOB DEMANDA</span><span>SPC / 2021</span></div>
-  </aside>`;
-}
-
 function intro() {
-  return `<main id="main" class="layout intro" tabindex="-1">
-    <section class="intro-copy">
-      <div class="eyebrow"><span class="small-rule"></span>UMA SIMULAÇÃO PARA JOGAR E DEBATER</div>
-      <h1>Seu próprio<br><em>chefe?</em></h1>
-      <p class="intro-lead">Você escolhe os horários.<br>Mas escolhe as condições?</p>
-      <p class="intro-description">Viva quatro decisões de um dia de entregas.<br>Depois, descubra quanto tempo custou o que sobrou.</p>
-      <div class="start-actions"><button class="button primary" data-action="start" data-mode="individual">Começar meu dia</button><button class="button secondary" data-action="start" data-mode="class">Conduzir com a turma</button></div>
-      <div class="intro-meta"><span>${icon('clock')}5–8 min de jogo</span><span>Uma conta. Muitas perguntas.</span></div>
-      <p class="offline-link">${offline ? 'Versão offline · pronta para jogar sem internet.' : '<a href="./jogo-offline.html" download="JOGAR-SEM-INTERNET.html">Baixar versão para jogar sem internet</a>'}</p>
-    </section>
-    <div class="intro-side">${receipt()}<p class="side-caption">A moto é sua. As regras também?</p></div>
-  </main>`;
+  return `<main id="main" class="layout intro" tabindex="-1"><section><div class="eyebrow">UM DIA COMO MOTORISTA DE APLICATIVO</div><h1>Seu dia.<br>Seu carro.<br><em>Quanto sobra?</em></h1><p class="intro-lead">Você dirige em Belo Horizonte.<br>A turma escolhe. A conta aparece.</p><p class="intro-description">Escolha seu horário, o tempo sem corrida e a distância rodada. Veja o que entra, o que sai e o que fica.</p><div class="start-actions"><button class="button primary" data-action="start" data-mode="class">Jogar com a turma ${icon('arrow')}</button><button class="button secondary" data-action="start" data-mode="individual">Jogar sozinho</button></div><p class="mode-help">Na aula, projete a tela e clique depois de ouvir a sala. São só três escolhas.</p><p class="offline-link">${offline ? 'Versão offline. Pode jogar sem internet.' : '<a href="./jogo-offline.html" download="JOGAR-SEM-INTERNET.html">Baixar para jogar sem internet</a>'}</p></section><aside class="intro-reference"><span class="eyebrow">PONTO DE PARTIDA</span><div class="fuel-symbol" aria-hidden="true">R$ / L</div><h2>Gasolina em BH</h2><strong>${money(REFERENCES.fuel.value)}</strong><p>por litro de gasolina comum</p><p class="reference-date">ANP · ${REFERENCES.fuel.period}</p><div class="reference-divider"></div><p><b>Carro de referência</b><br>${REFERENCES.car.name} · ${number(REFERENCES.car.value)} km/l na cidade, segundo o Inmetro.</p><button class="text-button" data-action="sources">De onde vêm os valores?</button></aside></main>`;
 }
-
-function progress() {
-  return `<ol class="steps" aria-label="Rodadas">${ROUNDS.map((r, i) => `<li class="${i === state.round ? 'current' : i < state.round ? 'done' : ''}" ${i === state.round ? 'aria-current="step"' : ''}><span>${i < state.round ? icon('check') : `0${i + 1}`}</span><span>${r.label}</span></li>`).join('')}</ol>`;
+function stepScreen() {
+  const step = STEPS[state.step];
+  return `<main id="main" class="game-screen" tabindex="-1"><ol class="steps" aria-label="As três escolhas">${STEPS.map((s, i) => `<li class="${i === state.step ? 'current' : i < state.step ? 'done' : ''}" ${i === state.step ? 'aria-current="step"' : ''}><span>0${i + 1}</span>${s.label}</li>`).join('')}</ol><div class="layout round-layout"><section class="round-copy"><div class="eyebrow">ESCOLHA ${state.step + 1} DE 3</div><h1>${step.title}</h1><p class="round-description">${step.description}</p><p class="choice-instruction">${state.mode === 'class' ? 'Ouça a turma. ' : ''}Clique em uma opção para continuar.</p><div class="choice-list">${step.options.map((o, i) => `<button class="choice" data-action="choose" data-value="${o.value}"><span class="choice-number">${i + 1}</span><span class="choice-text"><strong>${o.title}</strong><span>${o.detail}</span></span>${step.key === 'idlePercent' ? `<span class="choice-tag">${hours(state.inputs.hours * o.value / 100)} sem corrida</span>` : icon('arrow')}</button>`).join('')}</div><p class="scenario-note">As opções são cenários para comparar, não médias observadas de motoristas de BH.</p><div class="round-actions"><button class="text-button" data-action="back">${state.step ? 'Voltar uma escolha' : 'Voltar ao início'}</button><span class="keyboard-hint">Teclas 1, 2 ou 3 também escolhem</span></div><div class="mini-provocation"><span>PARA CONVERSAR</span><p>${step.question}</p></div></section>${receipt()}</div></main>`;
 }
-
-function survey(isAfter = false) {
-  const votes = isAfter ? state.after : state.before;
-  const total = voteTotal(votes);
-  const isClass = state.mode === 'class';
-  return `<main id="main" class="survey-screen" tabindex="-1">
-    <div class="eyebrow">${isAfter ? 'DEPOIS DE FECHAR A CONTA' : 'ANTES DE LIGAR O APLICATIVO'}</div>
-    <h1>${isAfter ? 'Mudou alguma coisa?' : 'Primeiro, uma pergunta.'}</h1>
-    <p class="survey-question">Trabalhar por aplicativo significa<br>ser seu próprio chefe?</p>
-    <p class="survey-instruction">${isClass ? 'Peça para a turma levantar a mão e registre quantas pessoas escolheram cada resposta.' : 'Escolha a resposta que faz mais sentido para você agora.'}</p>
-    <div class="vote-options">${VOTE_LABELS.map((label, i) => isClass ? `<label class="vote-input"><span><b>0${i + 1}</b>${label}</span><input type="number" inputmode="numeric" min="0" max="999" step="1" value="${votes[i]}" data-vote="${i}" aria-label="Votos em ${label}"></label>` : `<button class="vote-choice ${votes[i] ? 'selected' : ''}" data-action="vote" data-vote="${i}" aria-pressed="${Boolean(votes[i])}"><b>0${i + 1}</b><span>${label}</span>${votes[i] ? icon('check') : ''}</button>`).join('')}</div>
-    ${isClass ? `<p class="vote-count" aria-live="polite">${total} resposta${total === 1 ? '' : 's'} registrada${total === 1 ? '' : 's'} neste navegador</p>` : ''}
-    <div class="survey-actions"><button class="button primary" data-action="survey-next" ${total ? '' : 'disabled'}>${isAfter ? 'Comparar respostas' : 'Vamos trabalhar'}</button><button class="text-button" data-action="${isAfter ? 'result' : 'home'}">${isAfter ? 'Voltar ao resultado' : 'Voltar'}</button></div>
-    ${isClass ? '<p class="small-note">As escolhas da partida são feitas por você, após ouvir a turma. Cada navegador tem sua própria partida.</p>' : ''}
-  </main>`;
-}
-
-function roundScreen() {
-  const round = ROUNDS[state.round];
-  const reveal = state.phase === 'reveal';
-  const option = round.options.find((o) => o.id === (reveal ? state.choices[state.round] : state.selection));
-  const choices = !reveal && option ? [...state.choices, option.id] : state.choices;
-  return `<main id="main" class="game-screen" tabindex="-1">
-    ${progress()}
-    <div class="layout round-layout"><section class="round-copy">
-      <div class="eyebrow"><span class="round-stamp">RODADA 0${state.round + 1}</span><span>${round.time}</span></div>
-      <h1>${round.title}</h1>
-      <p class="round-description">${round.description}</p>
-      ${reveal ? `<div class="outcome"><div class="outcome-label">${icon('check')} ESCOLHA REGISTRADA: ${option.title}</div><p>${round.outcome(option)}</p></div><div class="provocation"><span>PARA PENSAR</span><h2>${round.question}</h2><p>${round.concept} <span>· p. ${round.pages}</span></p></div>` : `<div class="choice-list">${round.options.map((o, i) => `<button class="choice ${state.selection === o.id ? 'selected' : ''}" data-action="choose" data-choice="${o.id}" aria-pressed="${state.selection === o.id}"><span class="choice-number">${i + 1}</span><span class="choice-text"><strong>${o.title}</strong><span>${o.description}</span></span><span class="choice-tag">${o.tag}</span>${state.selection === o.id ? icon('check') : ''}</button>`).join('')}</div>`}
-      <details class="rules"><summary>Regras deste cenário</summary><p>${round.rule}</p></details>
-      <div class="round-actions"><button class="button primary" data-action="${reveal ? 'next-round' : 'confirm'}" ${!reveal && !option ? 'disabled' : ''}>${reveal ? state.round === 3 ? 'Ver minha conta' : 'Próxima decisão' : 'Confirmar escolha'}</button><button class="text-button" data-action="${reveal ? 'edit-choice' : 'back'}">${reveal ? 'Mudar esta escolha' : 'Voltar'}</button></div>
-      <p class="keyboard-hint">${state.mode === 'class' ? 'Ouça a turma e selecione a decisão coletiva. ' : ''}${reveal ? 'Enter avança' : 'Teclas 1–3 escolhem · Enter confirma'}</p>
-    </section>${receipt(choices, !reveal && Boolean(option))}</div>
-  </main>`;
-}
-
 function resultScreen() {
-  const a = calculate(state.choices);
-  const hasSupport = state.choices[3] === 'support';
-  return `<main id="main" class="result-screen" tabindex="-1">
-    <div class="result-head"><div><div class="eyebrow">O DIA TERMINOU</div><h1>Fechou o dia.<br><em>E a conta?</em></h1></div><div class="result-net"><span>SALDO DO TRABALHO</span><strong>${money(a.net)}</strong><p>${hours(a.totalHours)} dedicadas · ${money(a.hourly)} por hora</p></div></div>
-    <div class="result-grid"><section class="result-decisions"><h2>O caminho que você escolheu</h2><ol>${state.choices.slice(0, 3).map((id, i) => `<li><span>0${i + 1}</span><div><strong>${ROUNDS[i].options.find((o) => o.id === id).title}</strong><p>${ROUNDS[i].label}</p></div></li>`).join('')}</ol><p class="cost-summary">Dos ${money(a.gross)} recebidos, ${money(a.costs)} cobriram os custos do trabalho.</p><button class="text-button" data-action="replay">Refazer as decisões</button></section>
-    <section class="away-panel"><div class="eyebrow">TRÊS DIAS DE AFASTAMENTO</div><h2>${a.gap ? `Faltariam ${money(a.gap)}.` : 'As despesas estariam cobertas.'}</h2><p>Despesas pessoais simuladas: <strong>${money(a.awayCost)}</strong>. Consideramos apenas o saldo deste dia + apoio escolhido.</p><div class="support-switch" role="group" aria-label="Comparar apoio durante afastamento"><button data-action="support" data-support="no-support" class="${!hasSupport ? 'active' : ''}" aria-pressed="${!hasSupport}">Sem apoio</button><button data-action="support" data-support="support" class="${hasSupport ? 'active' : ''}" aria-pressed="${hasSupport}">Com apoio hipotético</button></div><dl class="away-ledger"><div><dt>Saldo do trabalho</dt><dd>${money(a.net)}</dd></div><div><dt>Apoio hipotético</dt><dd>${money(a.support)}</dd></div><div><dt>Despesas do afastamento</dt><dd>− ${money(a.awayCost)}</dd></div><div class="away-balance"><dt>Após essas despesas</dt><dd>${money(a.afterAway)}</dd></div></dl><p class="small-note">Compare os cenários. Apoio não aumenta o rendimento do trabalho; altera a proteção no afastamento.</p></section></div>
-    <section class="debate-section"><div class="debate-heading"><div class="eyebrow">AGORA, A PROVOCAÇÃO</div><div class="debate-tabs" role="group" aria-label="Escolher tema do debate">${DEBATES.map((d, i) => `<button class="${state.debate === i ? 'active' : ''}" data-action="debate" data-debate="${i}" aria-pressed="${state.debate === i}">${d.title}</button>`).join('')}</div></div><h2>${DEBATES[state.debate].question}</h2><p>${DEBATES[state.debate].prompt}</p><span class="concept-caption">${DEBATES[state.debate].concept}</span></section>
-    <div class="result-actions"><button class="button primary" data-action="after">Responder de novo</button><button class="button secondary" data-action="share">${icon('share')}Compartilhar o jogo</button><p class="small-note">Uma partida ilustra escolhas. Não representa a renda de toda uma categoria.</p></div>
-  </main>`;
+  const a = calculate(state.inputs), d = DEBATES[state.debate];
+  return `<main id="main" class="result-screen" tabindex="-1"><div class="result-heading"><div class="eyebrow">SUA CONTA DO DIA</div><h1>${a.balance < 0 ? 'Os custos passaram<br><em>do que entrou.</em>' : 'Quanto entrou.<br><em>Quanto ficou.</em>'}</h1><p>${hours(a.hours)} no aplicativo · ${hours(a.activeHours)} em corrida · ${number(a.km)} km rodados</p></div><section class="money-flow" aria-label="Resumo da conta"><div><span>ENTROU NAS CORRIDAS</span><strong>${money(a.income)}</strong><p>${a.hasActualIncome ? 'Valor que você informou' : 'Estimativa pela referência da pesquisa'}</p></div><span class="flow-sign" aria-hidden="true">−</span><div><span>SAIU EM CUSTOS</span><strong>${money(a.costs)}</strong><p>${money(a.fuel)} de gasolina${a.otherCosts ? ` + ${money(a.otherCosts)} de outros custos` : ''}</p></div><span class="flow-sign" aria-hidden="true">=</span><div class="net-block"><span>${a.balance < 0 ? 'FALTOU NO DIA' : 'FICOU PARA VOCÊ'}</span><strong class="result-net">${money(a.balance)}</strong><p>${money(a.perHour)} por hora do seu dia</p></div></section><p class="cost-alert">${a.otherCosts ? 'O resultado desconta os custos que você informou. Custos que ficaram de fora ainda precisam ser considerados.' : 'Esse valor ainda não é o lucro completo: faltam manutenção, seguro, IPVA, desgaste e outros custos do carro.'}</p><div class="result-actions"><button class="button primary" data-action="settings">Usar meus valores</button><button class="button secondary" data-action="replay">Testar outras escolhas</button></div><details class="calculation-details"><summary>Ver a conta, passo a passo</summary><ol><li>${a.hasActualIncome ? `Você informou ${money(a.income)} recebidos pelo motorista. A taxa do aplicativo não é descontada outra vez.` : `${hours(a.hours)} no aplicativo − ${hours(a.idleHours)} sem corrida = ${hours(a.activeHours)} em corrida. Ganhos: ${number(a.activeHours)} × ${money(a.hourlyRate)} = ${money(a.income)}.`}</li><li>${number(a.km)} km ÷ ${number(a.efficiency)} km/l = ${number(a.litres)} litros. Gasolina: ${number(a.litres)} litros × ${money(a.fuelPrice)} = ${money(a.fuel)}.</li><li>${money(a.income)} − ${money(a.fuel)} − ${money(a.otherCosts)} = ${money(a.balance)} depois dos custos informados. O cálculo usa os valores completos antes de arredondar.</li><li>${money(a.balance)} ÷ ${number(a.hours)} horas no aplicativo = ${money(a.perHour)} por hora, incluindo a espera.</li></ol></details><p class="basis-note">${a.hasActualIncome ? 'Conta com os valores informados por você.' : 'Ganhos estimados com referência nacional de maio/2023 a abril/2024. Não é a tarifa da Uber nem uma previsão de ganhos em BH hoje.'} Gasolina e consumo podem ser ajustados.</p><section class="debate-section"><div class="eyebrow">AGORA, A PROVOCAÇÃO</div><div class="debate-tabs" role="group" aria-label="Tema do debate">${DEBATES.map((item, i) => `<button class="${i === state.debate ? 'active' : ''}" data-action="debate" data-index="${i}" aria-pressed="${i === state.debate}">${item.title}</button>`).join('')}</div><h2>${d.question}</h2><p>${d.prompt}</p><p class="concept-caption">${d.source}</p></section><button class="text-button share-button" data-action="share">Compartilhar o jogo</button></main>`;
 }
-
-function voteBars(votes, label) {
-  const total = voteTotal(votes);
-  return `<section class="vote-chart"><h2>${label}</h2>${VOTE_LABELS.map((name, i) => { const pct = total ? Math.round(votes[i] / total * 100) : 0; return `<div class="bar-row"><div><span>${name}</span><strong>${pct}% <small>(${votes[i]})</small></strong></div><div class="bar-track"><div style="width:${pct}%"></div></div></div>`; }).join('')}<p class="small-note">${total} resposta${total === 1 ? '' : 's'}</p></section>`;
-}
-
-function reflectionScreen() {
-  return `<main id="main" class="reflection-screen" tabindex="-1"><div class="eyebrow">ANTES E DEPOIS</div><h1>A mesma pergunta.<br><em>Outra leitura?</em></h1><p class="survey-question">Trabalhar por aplicativo significa ser seu próprio chefe?</p><div class="comparison">${voteBars(state.before, 'Antes da partida')}${voteBars(state.after, 'Depois da partida')}</div>${voteTotal(state.before) !== voteTotal(state.after) ? '<p class="small-note">A quantidade de respostas mudou. Os percentuais descrevem cada votação, sem identificar quem mudou de opinião.</p>' : ''}<div class="closing-question"><span>PARA FECHAR O DEBATE</span><h2>Quem decide, quem recebe<br>e quem assume os riscos?</h2><p>Proponha uma mudança concreta. Quem deveria colocá-la em prática?</p></div><div class="result-actions"><button class="button primary" data-action="result">Voltar à conta</button><button class="button secondary" data-action="restart">Jogar novamente</button></div><p class="small-note">As respostas ficam apenas neste navegador. A votação é um recurso de aula, não uma pesquisa representativa.</p></main>`;
-}
-
+function field(label, key, min, max, help = '') { return `<label class="form-field"><span>${label}</span><input name="${key}" type="number" inputmode="decimal" min="${min}" max="${max}" step="any" value="${state.inputs[key] ?? ''}" ${key === 'actualIncome' ? '' : 'required'}>${help ? `<small>${help}</small>` : ''}</label>`; }
 function dialogs() {
-  return `<dialog id="sources-dialog" class="dialog"><div class="dialog-header"><h2>Sobre esta simulação</h2><button class="icon-button" data-action="close-dialog" aria-label="Fechar">${icon('close')}</button></div><div class="dialog-body"><p>Um jogo educativo para discutir uberização e plataformização do trabalho a partir de escolhas, tempo, renda e proteção.</p><h3>Os valores são fictícios</h3><p>R$ 22 por hora de receita, R$ 7 por hora de custo variável, R$ 18 de custos fixos, bônus e resultados de entregas foram escolhidos para tornar as contas visíveis. Não são dados do artigo ou da entrevista, nem previsões de uma plataforma real.</p><p>As consequências são predeterminadas e informadas. O jogo não simula punição por recusar entregas, não diagnostica saúde mental e não afirma que todos os trabalhadores estejam sem proteção.</p><h3>Para jogar com a turma</h3><p>Projete a tela, ouça as escolhas da sala e avance. Nas votações inicial e final, registre manualmente as mãos levantadas. As partidas de celulares diferentes são independentes.</p><h3>Referência conceitual</h3><p>ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael. <em>Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas.</em> Sociologias, v. 23, n. 57, p. 26–56, 2021.</p><a class="source-link" href="https://doi.org/10.1590/15174522-116484" target="_blank" rel="noopener noreferrer">Ler o artigo · DOI 10.1590/15174522-116484</a><p>Autogerenciamento subordinado: p. 40–42. Gerenciamento algorítmico: p. 33–34 e 39. Trabalho sob demanda: p. 39–40. Transferência de riscos: p. 40–41 e 47. Organização coletiva: p. 48–49.</p><p>As provocações sobre consumo, revisão de bloqueios e proteção são pontos de discussão. O texto analisa relações de trabalho em 2021; esta simulação não apresenta a legislação vigente.</p><h3>Como a conta funciona</h3><p>Saldo do trabalho = receita − custos variáveis − custos fixos. Rendimento por hora = saldo ÷ todo o tempo dedicado no jogo. O cenário de afastamento compara esse saldo + apoio hipotético com R$ 180 de despesas pessoais. Não considera reservas anteriores nem outras fontes de renda.</p></div><button class="button primary" data-action="close-dialog">Entendi</button></dialog>
-  <dialog id="restart-dialog" class="dialog small-dialog"><div class="dialog-header"><h2>Começar outra partida?</h2></div><p>As escolhas e votações desta partida serão apagadas neste navegador.</p><div class="dialog-actions"><button class="button secondary" data-action="close-dialog">Continuar esta partida</button><button class="button primary" data-action="reset-confirmed">Recomeçar</button></div></dialog>
-  <dialog id="share-dialog" class="dialog small-dialog"><div class="dialog-header"><h2>${offline ? 'Compartilhar a versão offline' : 'Compartilhar o jogo'}</h2><button class="icon-button" data-action="close-dialog" aria-label="Fechar">${icon('close')}</button></div>${offline ? '<p>Envie este arquivo HTML para os colegas. Eles podem abrir uma cópia no navegador e jogar sem internet.</p>' : '<p>Selecione e copie o endereço abaixo. Cada pessoa joga sua própria partida.</p><input class="share-address" type="text" readonly aria-label="Endereço do jogo"><p class="small-note">No computador, use Ctrl+C. No celular, toque e segure para copiar.</p>'}<div class="dialog-actions"><button class="button primary" data-action="close-dialog">Fechar</button></div></dialog>`;
+  return `<dialog id="settings-dialog" class="dialog"><div class="dialog-header"><h2>Coloque os valores do motorista</h2><button class="icon-button" data-action="close-dialog" aria-label="Fechar">${icon('close')}</button></div><p>Troque a estimativa pelos dados do dia. O resultado será calculado com o que você informar.</p><form id="settings-form"><div class="form-grid">${field('Recebido nas corridas (R$)', 'actualIncome', 0, 100000, 'Opcional. Valor repassado ao motorista, já depois da taxa do app. Em branco, usamos a pesquisa.')}${field('Outros custos do dia (R$)', 'otherCosts', 0, 10000, 'Parcela de manutenção, seguro, IPVA, aluguel ou desgaste. Não some a gasolina aqui.')}${field('Horas no aplicativo', 'hours', 0.5, 24, 'Inclua o tempo entre corridas.')}${field('Quilômetros totais do dia', 'km', 0, 2000)}</div><details class="advanced-settings"><summary>Ajustar gasolina, carro e referência de ganhos</summary><div class="form-grid">${field('Gasolina por litro (R$)', 'fuelPrice', 0.01, 30)}${field('Consumo do carro (km/l)', 'efficiency', 1, 100, 'Prefira o consumo medido pelo motorista. O valor inicial é de laboratório.')}${field('Tempo sem corrida (%)', 'idlePercent', 0, 100, 'Só afeta a estimativa de ganhos, não um valor recebido que você informou.')}${field('Ganhos por hora em corrida (R$)', 'hourlyRate', 0, 1000, 'Usado só quando o recebido fica em branco. Referência inicial: R$ 47 na pesquisa nacional.')}</div></details><div class="dialog-actions"><button class="button secondary" type="button" data-action="close-dialog">Cancelar</button><button class="button primary" type="submit">Calcular com esses valores</button></div></form></dialog>
+  <dialog id="sources-dialog" class="dialog"><div class="dialog-header"><h2>De onde vêm os valores?</h2><button class="icon-button" data-action="close-dialog" aria-label="Fechar">${icon('close')}</button></div><div class="dialog-body"><h3>Gasolina de Belo Horizonte</h3><p>${money(REFERENCES.fuel.value)} por litro de gasolina comum. Média de 41 postos na semana de ${REFERENCES.fuel.period}. ANP, coluna “Preço médio revenda”. É uma referência daquela semana, não uma atualização automática.</p><a href="${REFERENCES.fuel.url}" target="_blank" rel="noopener noreferrer">Planilha oficial da ANP</a><h3>Ganhos em corrida</h3><p>R$ 47 por hora em viagem é a referência nacional publicada pelo Cebrap/Amobitec, com dados de ${REFERENCES.earnings.period}. Já desconta a taxa do aplicativo e inclui gorjetas e promoções. Não desconta os custos do veículo. A espera não entra nas horas em viagem.</p><p>A pesquisa foi encomendada pela Amobitec, associação de empresas de aplicativos. A referência histórica não é tarifa oficial da Uber, não foi atualizada pela inflação e não mede o rendimento atual de BH. Use o repasse real quando disponível.</p><a href="${REFERENCES.earnings.url}" target="_blank" rel="noopener noreferrer">Apresentação da pesquisa, p. 5 e 16</a><h3>Consumo do carro</h3><p>${REFERENCES.car.name}: ${number(REFERENCES.car.value)} km/l com gasolina na cidade. Inmetro, PBE Veicular 2026, tabela de janeiro, p. 1. Trânsito, relevo, ar-condicionado e condução mudam o consumo real.</p><a href="${REFERENCES.car.url}" target="_blank" rel="noopener noreferrer">Tabela oficial do Inmetro</a><h3>O que é escolhido na simulação</h3><p>Jornada, percentuais sem corrida e quilômetros são cenários para a aula. Não são médias locais observadas. A conta combina uma referência histórica nacional de ganhos com gasolina de BH e consumo de laboratório. Não promete um resultado real.</p><p>Outros custos começam em zero porque não temos os comprovantes do carro. Até você informá-los, o resultado é apenas o valor após gasolina. Não descontamos novamente a taxa da plataforma.</p><h3>Base da discussão</h3><p>ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael. Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas. Sociologias, v. 23, n. 57, p. 26 a 56, 2021.</p><a href="${REFERENCES.article}" target="_blank" rel="noopener noreferrer">Ler o artigo</a><h3>Como jogar com a turma</h3><p>Projete e ouça a sala antes de clicar. Não há votação numérica nem coleta de celulares. Cada navegador tem seu próprio jogo.</p></div><button class="button primary" data-action="close-dialog">Entendi</button></dialog>
+  <dialog id="restart-dialog" class="dialog small-dialog"><h2>Recomeçar o jogo?</h2><p>As escolhas e os valores desta partida serão apagados.</p><div class="dialog-actions"><button class="button secondary" data-action="close-dialog">Continuar esta partida</button><button class="button primary" data-action="reset-confirmed">Recomeçar</button></div></dialog>
+  <dialog id="share-dialog" class="dialog small-dialog"><div class="dialog-header"><h2>Compartilhar o jogo</h2><button class="icon-button" data-action="close-dialog" aria-label="Fechar">${icon('close')}</button></div>${offline ? '<p>Envie este arquivo HTML. Os colegas podem abrir uma cópia no navegador e jogar sem internet.</p>' : '<p>Copie o endereço abaixo. Cada pessoa terá seu próprio jogo.</p><input class="share-address" type="text" readonly aria-label="Endereço do jogo">'}<button class="button primary" data-action="close-dialog">Fechar</button></dialog>`;
 }
-
-function render(focus = true) {
-  const screens = { intro, before: () => survey(false), round: roundScreen, reveal: roundScreen, result: resultScreen, after: () => survey(true), reflection: reflectionScreen };
-  document.body.dataset.mode = state.mode;
-  document.body.dataset.phase = state.phase;
-  root.innerHTML = header() + screens[state.phase]() + footer() + dialogs() + '<div id="toast" class="toast" role="status"></div>';
-  if (focus) { document.querySelector('#main')?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: 'instant' }); }
-}
-
-function toast(message) {
-  const target = document.querySelector('#toast');
-  clearTimeout(toastTimer);
-  target.textContent = message;
-  target.classList.add('visible');
-  toastTimer = setTimeout(() => target.classList.remove('visible'), 3500);
-}
-
-function closeDialogs() { document.querySelectorAll('dialog[open]').forEach((d) => d.close()); }
-
+function render(focus = true) { document.body.dataset.mode = state.mode; document.body.dataset.phase = state.phase; root.innerHTML = header() + ({ intro, play: stepScreen, result: resultScreen }[state.phase])() + footer() + dialogs() + '<div id="toast" class="toast" role="status"></div>'; if (focus) { document.querySelector('#main').focus({ preventScroll: true }); window.scrollTo(0, 0); } }
 async function action(button) {
   const name = button.dataset.action;
-  if (name === 'start') return change({ ...initialState(), mode: button.dataset.mode === 'class' ? 'class' : 'individual', phase: 'before' });
-  if (name === 'home') return change(initialState());
-  if (name === 'vote') {
-    const index = Number(button.dataset.vote);
-    const key = state.phase === 'after' ? 'after' : 'before';
-    const votes = [0, 0, 0]; votes[index] = 1;
-    change({ [key]: votes }, false);
-    document.querySelector(`[data-action="vote"][data-vote="${index}"]`)?.focus({ preventScroll: true });
-  }
-  if (name === 'survey-next') {
-    const votes = state.phase === 'after' ? state.after : state.before;
-    if (!voteTotal(votes)) return;
-    return change({ phase: state.phase === 'after' ? 'reflection' : 'round', selection: null });
-  }
-  if (name === 'choose') {
-    const id = button.dataset.choice;
-    if (!ROUNDS[state.round].options.some((o) => o.id === id)) return;
-    change({ selection: id }, false);
-    document.querySelector(`[data-choice="${id}"]`)?.focus({ preventScroll: true });
-  }
-  if (name === 'confirm' && state.selection) return change({ choices: [...state.choices.slice(0, state.round), state.selection], phase: 'reveal' });
-  if (name === 'next-round') return change(state.round === 3 ? { phase: 'result', selection: null } : { round: state.round + 1, phase: 'round', selection: null });
-  if (name === 'edit-choice') return change({ phase: 'round', selection: state.choices[state.round], choices: state.choices.slice(0, state.round) });
-  if (name === 'back') return change(state.round === 0 ? { phase: 'before' } : { round: state.round - 1, phase: 'round', selection: state.choices[state.round - 1], choices: state.choices.slice(0, state.round - 1) });
-  if (name === 'replay') return change({ round: 0, phase: 'round', choices: [], selection: null, after: [0, 0, 0] });
-  if (name === 'result') return change({ phase: 'result' });
-  if (name === 'after') return change({ phase: 'after' });
-  if (name === 'debate') {
-    const index = Number(button.dataset.debate);
-    change({ debate: index }, false);
-    document.querySelector(`[data-debate="${index}"]`)?.focus({ preventScroll: true });
-  }
-  if (name === 'support') {
-    const support = button.dataset.support;
-    if (!['support', 'no-support'].includes(support)) return;
-    change({ choices: [...state.choices.slice(0, 3), support] }, false);
-    document.querySelector(`[data-support="${support}"]`)?.focus({ preventScroll: true });
-  }
-  if (name === 'sources') return document.querySelector('#sources-dialog').showModal();
-  if (name === 'restart') return document.querySelector('#restart-dialog').showModal();
-  if (name === 'close-dialog') return closeDialogs();
-  if (name === 'reset-confirmed') return change(initialState());
-  if (name === 'fullscreen') {
-    try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
-    catch { toast('Use F11 no navegador para projetar em tela cheia.'); }
-  }
-  if (name === 'share') {
-    const dialog = document.querySelector('#share-dialog');
-    if (offline) return dialog.showModal();
-    const address = new URL('./', window.location.href).href;
-    try { await navigator.clipboard.writeText(address); toast('Link copiado. Cada pessoa joga sua própria partida.'); }
-    catch {
-      const field = dialog.querySelector('input');
-      field.value = address;
-      dialog.showModal();
-      field.focus();
-      field.select();
-    }
-  }
+  if (name === 'start') return change({ ...initialState(), mode: button.dataset.mode === 'class' ? 'class' : 'individual', phase: 'play' });
+  if (name === 'home' || name === 'reset-confirmed') return change(initialState());
+  if (name === 'choose' && state.phase === 'play') { const step = STEPS[state.step], value = Number(button.dataset.value); if (!step.options.some((o) => o.value === value)) return; return change({ inputs: { ...state.inputs, [step.key]: value }, completed: Math.max(state.completed, state.step + 1), ...(state.step === 2 ? { phase: 'result' } : { step: state.step + 1 }) }); }
+  if (name === 'back') return state.step ? change({ step: state.step - 1 }) : change({ phase: 'intro' });
+  if (name === 'replay') return change({ phase: 'play', step: 0, completed: 0, inputs: { ...DEFAULTS } });
+  if (name === 'debate') { change({ debate: Number(button.dataset.index) }, false); document.querySelector(`[data-index="${state.debate}"]`).focus({ preventScroll: true }); return; }
+  if (name === 'close-dialog') return document.querySelectorAll('dialog[open]').forEach((d) => d.close());
+  if (['sources', 'settings', 'restart'].includes(name)) return document.querySelector(`#${name}-dialog`).showModal();
+  if (name === 'fullscreen') { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { toast('Use F11 no navegador para abrir em tela cheia.'); } }
+  if (name === 'share') { const dialog = document.querySelector('#share-dialog'); if (offline) return dialog.showModal(); const address = new URL('./', location.href).href; try { await navigator.clipboard.writeText(address); toast('Link copiado.'); } catch { const input = dialog.querySelector('input'); input.value = address; dialog.showModal(); input.focus(); input.select(); } }
 }
-
-root.addEventListener('click', (event) => {
-  const button = event.target.closest('button[data-action]');
-  if (button && !button.disabled) action(button).catch(() => toast('Não foi possível concluir essa ação. Tente novamente.'));
-  if (event.target.tagName === 'DIALOG') {
-    const rect = event.target.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) event.target.close();
-  }
-});
-
-root.addEventListener('input', (event) => {
-  if (!event.target.matches('input[data-vote]')) return;
-  const index = Number(event.target.dataset.vote);
-  const key = state.phase === 'after' ? 'after' : 'before';
-  const value = Number(event.target.value);
-  state[key][index] = Number.isFinite(value) ? Math.min(999, Math.max(0, Math.trunc(value))) : 0;
-  save();
-  const total = voteTotal(state[key]);
-  document.querySelector('.vote-count').textContent = `${total} resposta${total === 1 ? '' : 's'} registrada${total === 1 ? '' : 's'} neste navegador`;
-  document.querySelector('[data-action="survey-next"]').disabled = !total;
-});
-root.addEventListener('change', (event) => {
-  if (event.target.matches('input[data-vote]')) {
-    const key = state.phase === 'after' ? 'after' : 'before';
-    event.target.value = normalizeVotes(state[key])[Number(event.target.dataset.vote)];
-  }
-});
-
-document.addEventListener('keydown', (event) => {
-  if (event.ctrlKey || event.altKey || event.metaKey || document.querySelector('dialog[open]') || event.target.matches('input, textarea, select, [contenteditable]')) return;
-  if (event.repeat && (event.key === 'Enter' || /^[1-3]$/.test(event.key) || event.key.toLowerCase() === 'f')) { event.preventDefault(); return; }
-  if (event.key.toLowerCase() === 'f') { event.preventDefault(); document.querySelector('[data-action="fullscreen"]')?.click(); }
-  if (state.phase === 'round' && /^[1-3]$/.test(event.key)) {
-    const option = ROUNDS[state.round].options[Number(event.key) - 1];
-    if (option) { event.preventDefault(); document.querySelector(`[data-choice="${option.id}"]`)?.click(); }
-  }
-  if (event.key === 'Enter' && (state.phase === 'round' && event.target.closest('[data-action="choose"]') || !event.target.closest('button, a, summary'))) {
-    const button = document.querySelector('main .button.primary:not(:disabled)');
-    if (button) { event.preventDefault(); button.click(); }
-  }
-});
-
+root.addEventListener('click', (event) => { const button = event.target.closest('button[data-action]'); if (button && !(button.dataset.action === 'choose' && event.detail > 1)) action(button).catch(() => toast('Não foi possível concluir. Tente novamente.')); });
+root.addEventListener('submit', (event) => { if (event.target.id !== 'settings-form') return; event.preventDefault(); if (!event.target.reportValidity()) return; const inputs = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, key === 'actualIncome' && value === '' ? null : Number(value)])); event.target.closest('dialog').close(); change({ inputs: normalizeInputs(inputs) }); });
+document.addEventListener('keydown', (event) => { if (event.ctrlKey || event.metaKey || event.altKey || document.querySelector('dialog[open]') || event.target.matches('input, textarea, select, [contenteditable]')) return; if (event.repeat) { if (/^[1-3fF]$/.test(event.key) || event.key === 'Enter') event.preventDefault(); return; } if (state.phase === 'play' && /^[1-3]$/.test(event.key)) { event.preventDefault(); document.querySelectorAll('[data-action="choose"]')[Number(event.key) - 1]?.click(); } if (event.key.toLowerCase() === 'f') { event.preventDefault(); document.querySelector('[data-action="fullscreen"]').click(); } });
 render(false);
