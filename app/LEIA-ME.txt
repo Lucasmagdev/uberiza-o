@@ -1,13 +1,17 @@
-SEU PRÓPRIO CHEFE? — MOTORISTA POR UM DIA EM BELO HORIZONTE
+SEU PRÓPRIO CHEFE? — UBER OU IFOOD EM BELO HORIZONTE
 
 COMO JOGAR
-1. Clique em Jogar com a turma ou Jogar sozinho.
-2. Escolha as horas no aplicativo, o tempo sem corrida e os quilômetros totais.
-3. Veja a conta: entrou nas corridas, saiu em custos e ficou para você.
-4. Use Usar meus valores para informar ganhos e despesas do motorista.
+1. Escolha Uber (carro) ou iFood (moto). Clique em Jogar com a turma ou Jogar sozinho.
+2. Uber: horas no aplicativo, tempo sem corrida e quilômetros totais.
+   iFood: horas no aplicativo, entregas concluídas e quilômetros totais.
+3. Veja a conta: entrou, saiu em custos e ficou para você.
+4. Use Usar meus valores, na prévia ou no resultado, para informar ganhos e despesas.
 5. Abra os temas Autonomia, Tempo, Custos e Proteção para debater.
 Cada escolha avança automaticamente. As teclas 1, 2 e 3 também escolhem.
 Projete e ouça a sala antes de clicar. Cada navegador tem seu próprio jogo.
+Recarregar a página começa tudo de novo, voltando à escolha Uber/iFood.
+A prévia lateral muda com as escolhas e os valores aplicados. Não recuperamos
+saldos antigos nem escolhas de partidas anteriores.
 
 REFERÊNCIAS
 Gasolina comum em BH: R$ 6,42/l, ANP, 27/09 a 03/10/2026, 41 postos.
@@ -16,8 +20,18 @@ Ganhos: R$ 47/h em viagem, referência nacional Cebrap/Amobitec com dados de
 maio/2023 a abril/2024. Já desconta a taxa do aplicativo. Não desconta o veículo.
 A pesquisa foi encomendada pela associação empresarial Amobitec.
 
-A espera reduz as horas que geram ganhos estimados. Os quilômetros totais
-determinam o combustível. Os cenários não representam médias locais observadas.
+Na Uber, a espera reduz as horas que geram ganhos estimados.
+No iFood, entregas concluídas multiplicadas pelo valor por rota geram a estimativa.
+Cada entrega simulada corresponde a uma rota simples com um pedido, sem pedidos
+agrupados nem programas com ganho por período. Base ajustável: R$ 7,50 por rota,
+conforme anúncio do iFood com início em junho/2025. O valor real pode ser diferente.
+Consumo da moto: Yamaha Factor 150, linha 2026, 55,3 km/l em teste do Instituto
+Mauá de Tecnologia, em condições controladas, divulgado pela Yamaha em 24/02/2026.
+Substitua pelo consumo medido pelo entregador; não é média de entregas em BH.
+Os quilômetros totais determinam o combustível nos dois módulos. Não são
+convertidos automaticamente em quilômetros remunerados. Distância, gorjetas,
+promoções e adicionais não são somados automaticamente à receita do iFood.
+Os cenários não representam médias locais observadas.
 Os ganhos históricos não foram atualizados pela inflação, não são tarifa oficial
 da Uber e não garantem renda em BH. Use o repasse real quando disponível.
 Outros custos começam em zero; o resultado inicial é após gasolina, não lucro completo.
@@ -40,7 +54,8 @@ VERIFICAR
   node scripts/browser-check.mjs
 O teste de navegador precisa do servidor local ativo e usa o Chrome no caminho
 padrão do Windows. Aceita uma URL para conferir uma publicação.
-Os cinco testes de cálculo cobrem 27 combinações, precisão, tempo sem corrida,
-repasse real, custos adicionais, zero recebido, prejuízo e recuperação de estado.
-A interface verifica as três escolhas, formulário, teclado, tela cheia, retomada,
-celulares, falhas de armazenamento/cópia e funcionamento offline sem requisições HTTP.
+Os oito testes de cálculo cobrem 54 combinações, precisão, tempo sem corrida,
+repasse real, custos adicionais, zero recebido, prejuízo e isolamento dos módulos.
+A interface verifica seleção de plataforma, prévia, formulário, teclado,
+tela cheia, reinício ao recarregar, telas pequenas, cópia e funcionamento
+offline dos dois módulos sem requisições HTTP.

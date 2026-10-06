@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DEFAULTS, STEPS, REFERENCES, calculate, normalizeInputs, normalizeState, initialState, hours } from '../public/engine.js';
+import { DEFAULTS, STEPS, REFERENCES, PROFILES, calculate, normalizeInputs, normalizeState, initialState, hours } from '../public/engine.js';
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`);
 test('all 27 scenarios separate total time, earnings, fuel and net hourly balance', () => {
   let count = 0;
@@ -43,6 +43,38 @@ test('invalid inputs and saves recover safely, with no division by zero', () => 
   assert.deepEqual(normalizeInputs(null), DEFAULTS);
   assert.deepEqual(normalizeState({ version: 1, phase: 'result' }), initialState());
   assert.deepEqual(normalizeState({ ...initialState(), phase: 'result', completed: 1 }), initialState());
-  const good = { ...initialState(), phase: 'result', completed: 3, inputs: { ...DEFAULTS, actualIncome: 0 } };
+  const good = { ...initialState('uber'), phase: 'result', completed: 3, inputs: { ...DEFAULTS, actualIncome: 0 } };
   assert.deepEqual(normalizeState(good), good);
+});
+test('all 27 iFood scenarios use completed deliveries and motorcycle fuel, with total time in the denominator', () => {
+  const p = PROFILES.ifood;
+  let count = 0;
+  for (const h of p.steps[0].options) for (const d of p.steps[1].options) for (const k of p.steps[2].options) {
+    const r = calculate({ ...p.defaults, hours: h.value, deliveries: d.value, km: k.value }, 'ifood');
+    close(r.income, d.value * 7.5); close(r.fuel, k.value / 55.3 * 6.42);
+    close(r.balance, r.income - r.fuel); close(r.perHour, r.balance / h.value);
+    assert.equal(r.activeHours, null); assert.equal(r.idleHours, null);
+    count++;
+  }
+  assert.equal(count, 27);
+});
+test('iFood actual repasse overrides delivery estimate, including zero and negative net balances', () => {
+  const r = calculate({ ...PROFILES.ifood.defaults, actualIncome: 180, otherCosts: 25 }, 'ifood');
+  close(r.income, 180); close(r.balance, 180 - 120 / 55.3 * 6.42 - 25);
+  assert.equal(calculate({ actualIncome: 0 }, 'ifood').income, 0);
+  assert.ok(calculate({ deliveries: 0 }, 'ifood').balance < 0);
+  assert.equal(calculate({ km: 0, deliveries: 0 }, 'ifood').balance, 0);
+  assert.equal(calculate({ deliveries: 18, deliveryRate: 10 }, 'ifood').income, 180);
+});
+test('fresh platform selection isolates car and motorcycle inputs, with safe module defaults', () => {
+  assert.equal(initialState().phase, 'select'); assert.equal(initialState().platform, null);
+  const uber = initialState('uber'), ifood = initialState('ifood');
+  uber.inputs.actualIncome = 800; uber.inputs.efficiency = 8;
+  assert.equal(ifood.inputs.actualIncome, null); assert.equal(ifood.inputs.efficiency, 55.3);
+  assert.equal(initialState('uber').inputs.actualIncome, null);
+  assert.deepEqual(normalizeInputs(null, 'ifood'), PROFILES.ifood.defaults);
+  assert.equal(normalizeInputs({ deliveries: -5, efficiency: 0 }, 'ifood').deliveries, 0);
+  assert.equal(normalizeInputs({ deliveries: 18.5 }, 'ifood').deliveries, 18);
+  assert.deepEqual(normalizeState({ ...ifood, platform: 'unknown' }), initialState());
+  assert.equal(normalizeState({ ...ifood, phase: 'result', completed: 3 }).platform, 'ifood');
 });
