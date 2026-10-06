@@ -42,10 +42,10 @@ O comando de build também cria `output/JOGAR-SEM-INTERNET.html`. Abra esse arqu
 1. Escolha **Uber**, **99** ou **iFood**, selecione **Jogar com a turma** e projete a tela.
 2. Ouça a sala e escolha jornada, espera e distância na Uber/99, ou jornada, entregas e distância no iFood.
 3. Compare os ganhos, o combustível e o valor após os custos informados.
-4. Em **Usar meus valores**, na prévia ou no resultado, informe o repasse e os custos do trabalhador.
+4. Em **Usar meus valores**, no resultado, informe o repasse e os custos do trabalhador.
 5. Explore as provocações sobre autonomia, tempo, custos e proteção.
 
-Cada navegador tem uma partida independente. O apresentador clica após ouvir a sala. **Recarregar a página começa tudo de novo**, voltando à escolha entre Uber, 99 e iFood. Não recuperamos escolhas nem saldos de partidas anteriores. A prévia lateral é recalculada a cada escolha e ao aplicar novos valores.
+Cada navegador tem uma partida independente. O apresentador clica após ouvir a sala. **Recarregar a página começa tudo de novo**, voltando à escolha entre Uber, 99 e iFood. Não recuperamos escolhas nem saldos de partidas anteriores. A conta aparece após as três escolhas e pode ser recalculada ao aplicar novos valores no resultado.
 
 Na Uber e na 99, os ganhos iniciais usam uma referência nacional histórica por hora **em corrida**, sem remunerar a espera. No iFood, multiplicamos as entregas concluídas por uma base ajustável de R$ 7,50, anunciada para rotas de moto ou carro com início em junho/2025. Cada entrega da simulação é uma rota simples com um pedido; pedidos agrupados e programas de ganho por período não são reproduzidos. Distância, gorjetas e adicionais não são somados automaticamente à receita.
 
@@ -73,7 +73,7 @@ Com o servidor ativo, execute em outro terminal:
 node scripts/browser-check.mjs
 ```
 
-Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` aceita uma URL como argumento para verificar uma publicação. Os oito testes de cálculo cobrem 81 combinações, valores recebidos reais, despesas adicionais, espera, resultados negativos e isolamento entre módulos. A verificação de interface inclui a escolha de plataforma, prévia, formulário, reinício ao recarregar, teclado, tela cheia e os três aplicativos offline. Os comandos antigos `interface-check` e `improvements-check` chamam a verificação consolidada.
+Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` aceita uma URL como argumento para verificar uma publicação. Os oito testes de cálculo cobrem 81 combinações, valores recebidos reais, despesas adicionais, espera, resultados negativos e isolamento entre módulos. A verificação de interface inclui a escolha de plataforma, conta final, formulário, reinício ao recarregar, teclado, tela cheia e os três aplicativos offline. Os comandos antigos `interface-check` e `improvements-check` chamam a verificação consolidada.
 
 `scripts/artifact-check.mjs` verifica os arquivos de uma publicação registrada localmente em `app/.netlify/deployment.json`. Esse registro e suas credenciais são privados e não fazem parte do repositório.
 

@@ -21,13 +21,13 @@ Escolha Uber, 99 ou iFood e clique em Jogar com a turma.
 Uber/99: horário, tempo sem corrida e quilômetros.
 iFood: horário, entregas concluídas e quilômetros de moto.
 Cada clique avança. No resultado, leia entrou, custos e ficou.
-Use Usar meus valores na prévia ou no resultado para informar os dados reais.
+Use Usar meus valores no resultado para informar os dados reais.
 Depois, explore Autonomia, Tempo, Custos e Proteção.
 
 RECARREGAR
 Recarregar começa tudo de novo, voltando à escolha Uber/99/iFood.
-Escolhas e saldos antigos não são recuperados. A prévia muda com as escolhas
-atuais e com os valores aplicados no formulário.
+Escolhas e saldos antigos não são recuperados. A conta aparece após as três
+escolhas e pode ser recalculada com seus valores no resultado.
 
 REFERÊNCIAS
 Gasolina de BH: R$ 6,42/l, ANP, 27/09 a 03/10/2026.

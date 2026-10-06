@@ -38,8 +38,8 @@ Exemplo de cenário, não renda observada: 8 horas, 20% sem corrida e 180 km ger
 
 Exemplo iFood, também simulado: 8 horas, 18 rotas simples e 120 km geram R$ 135,00 pela base de R$ 7,50. O consumo de referência da Factor gera R$ 13,93 de gasolina. Restam R$ 121,07 antes dos outros custos da moto, ou R$ 15,13 por hora total. A conta usa precisão completa antes de arredondar a exibição.
 
-## Recarregamento e prévia
+## Recarregamento e resultado
 
-Recarregar volta à escolha Uber/99/iFood e começa uma nova partida. Escolhas e saldos não são recuperados do armazenamento. Cada módulo começa com seus próprios valores. A prévia lateral calcula o saldo a partir das escolhas atuais e dos valores aplicados em **Usar meus valores**.
+Recarregar volta à escolha Uber/99/iFood e começa uma nova partida. Escolhas e saldos não são recuperados do armazenamento. Cada módulo começa com seus próprios valores. A conta aparece após as três escolhas. No resultado, **Usar meus valores** permite recalcular o saldo com ganhos e despesas informados.
 
 A base conceitual do debate continua sendo [Abílio, Amorim e Grohmann (2021)](https://doi.org/10.1590/15174522-116484). As referências de preços e ganhos não são números retirados desse artigo.

@@ -5,13 +5,13 @@ COMO JOGAR
 2. Uber/99: horas no aplicativo, tempo sem corrida e quilômetros totais.
    iFood: horas no aplicativo, entregas concluídas e quilômetros totais.
 3. Veja a conta: entrou, saiu em custos e ficou para você.
-4. Use Usar meus valores, na prévia ou no resultado, para informar ganhos e despesas.
+4. Use Usar meus valores, no resultado, para informar ganhos e despesas.
 5. Abra os temas Autonomia, Tempo, Custos e Proteção para debater.
 Cada escolha avança automaticamente. As teclas 1, 2 e 3 também escolhem.
 Projete e ouça a sala antes de clicar. Cada navegador tem seu próprio jogo.
 Recarregar a página começa tudo de novo, voltando à escolha Uber/99/iFood.
-A prévia lateral muda com as escolhas e os valores aplicados. Não recuperamos
-saldos antigos nem escolhas de partidas anteriores.
+A conta aparece após as três escolhas. No resultado, você pode aplicar seus valores.
+Não recuperamos saldos antigos nem escolhas de partidas anteriores.
 
 REFERÊNCIAS
 Gasolina comum em BH: R$ 6,42/l, ANP, 27/09 a 03/10/2026, 41 postos.
@@ -60,6 +60,6 @@ O teste de navegador precisa do servidor local ativo e usa o Chrome no caminho
 padrão do Windows. Aceita uma URL para conferir uma publicação.
 Os oito testes de cálculo cobrem 81 combinações, precisão, tempo sem corrida,
 repasse real, custos adicionais, zero recebido, prejuízo e isolamento dos módulos.
-A interface verifica seleção de plataforma, prévia, formulário, teclado,
+A interface verifica seleção de plataforma, conta final, formulário, teclado,
 tela cheia, reinício ao recarregar, telas pequenas, cópia e funcionamento
 offline dos três aplicativos sem requisições HTTP.
