@@ -20,7 +20,7 @@ async function navigate(page) {
   await page.locator('.platform-options').waitFor();
 }
 async function start(page, platform, mode = 'individual') {
-  await page.locator(`[data-action=select-platform][data-platform=${platform}]`).click();
+  await page.locator(`[data-action=select-platform][data-platform="${platform}"]`).click();
   await page.locator(`[data-action=start][data-mode=${mode}]`).click();
 }
 async function choose(page, platform = 'uber') { for (const v of platform === 'ifood' ? [8, 18, 120] : [8, 20, 180]) await page.locator(`[data-action=choose][data-value="${v}"]`).click(); }
@@ -34,6 +34,7 @@ async function fresh(width = 1440, setup) {
 try {
   let [context, page] = await fresh();
   await page.screenshot({ path: path.join(folder, 'platform-selection.png'), fullPage: true });
+  assert.equal(await page.locator('[data-action=select-platform]').count(), 3);
   await page.getByRole('button', { name: 'Fontes', exact: true }).click();
   const source = await page.getByRole('dialog').innerText();
   assert.ok(source.includes('41 postos') && source.includes('13,5 km/l') && source.includes('55,3 km/l') && source.includes('7,50') && source.includes('condições controladas'));
@@ -84,14 +85,20 @@ try {
   assert.equal(await page.locator('.result-net').count(), 1);
   await page.getByRole('button', { name: 'Tela cheia', exact: true }).click(); assert.equal(await page.evaluate(() => !!document.fullscreenElement), true);
   await page.getByRole('button', { name: 'Tela cheia', exact: true }).click();
-  await page.getByRole('button', { name: 'Trocar Uber / iFood', exact: true }).click();
+  await page.getByRole('button', { name: 'Trocar aplicativo', exact: true }).click();
   await page.getByRole('button', { name: 'Começar de novo', exact: true }).click();
   await start(page, 'uber'); assert.equal(await page.locator('.receipt-total').innerText(), 'R$\u00a0215,20');
   await page.locator('[data-action=choose][data-value="10"]').click(); await page.reload();
   assert.equal(await page.locator('.platform-options').count(), 1);
+  await start(page, '99');
+  assert.ok((await page.locator('.header-center').innerText()).includes('99'));
+  await choose(page, '99');
+  assert.equal(await page.locator('.result-net').innerText(), 'R$\u00a0215,20');
+  assert.ok((await page.locator('.result-heading').innerText()).includes('99'));
+  await page.reload(); assert.equal(await page.locator('[data-action=select-platform]').count(), 3);
   await context.close();
-  reports.push('Uber and iFood have isolated formulas and inputs. Preview updates with choices and actual amounts; reload resets from results and mid-game. Zero earnings, validation, keyboard, sharing, debates and fullscreen passed.');
-  for (const width of [320, 390, 720, 1920]) for (const platform of ['uber', 'ifood']) {
+  reports.push('Uber, 99 and iFood are selectable and complete. Car and motorcycle inputs remain isolated. Preview updates with choices and actual amounts; reload resets from results and mid-game. Zero earnings, validation, keyboard, sharing, debates and fullscreen passed.');
+  for (const width of [320, 390, 720, 1920]) for (const platform of ['uber', '99', 'ifood']) {
     [context, page] = await fresh(width); await layout(page);
     if (platform === 'ifood') await page.screenshot({ path: path.join(folder, `selection-${width}.png`), fullPage: true });
     await start(page, platform);
@@ -104,7 +111,7 @@ try {
     await page.screenshot({ path: path.join(folder, `${platform}-result-${width}.png`), fullPage: true });
     await context.close();
   }
-  reports.push('Both modules fit at 320, 390, 720 and 1920 pixels, including platform selection and expanded actual-values forms.');
+  reports.push('All three apps fit at 320, 390, 720 and 1920 pixels, including platform selection and expanded actual-values forms.');
   [context, page] = await fresh(1440, () => {
     localStorage.setItem('seu-proprio-chefe-v2', JSON.stringify({ version: 2, phase: 'result', completed: 3, inputs: { actualIncome: 9999 } }));
     Object.defineProperty(Storage.prototype, 'getItem', { value() { throw new DOMException('Denied'); } });
@@ -119,13 +126,13 @@ try {
   page.on('pageerror', (e) => errors.push(e.message)); const network = [];
   page.on('request', (r) => { if (r.url().startsWith('http')) network.push(r.url()); });
   await page.goto(pathToFileURL(path.join(root, 'dist/jogo-offline.html')).href);
-  for (const platform of ['ifood', 'uber']) {
+  for (const platform of ['ifood', 'uber', '99']) {
     await start(page, platform, 'class'); await page.keyboard.press('2'); await page.keyboard.press('2'); await page.keyboard.press('2');
     assert.equal(await page.locator('.result-net').innerText(), platform === 'ifood' ? 'R$\u00a0121,07' : 'R$\u00a0215,20');
     await layout(page); await page.reload(); assert.equal(await page.locator('.platform-options').count(), 1);
   }
   assert.deepEqual(network, []); await context.close(); assert.deepEqual(errors, []);
-  reports.push('Offline file supports both modules and refresh reset without HTTP requests or JavaScript errors.');
+  reports.push('Offline file supports Uber, 99 and iFood and refresh reset without HTTP requests or JavaScript errors.');
   const report = { passed: true, base, checks: reports, errors };
   await fs.writeFile(path.join(folder, 'browser-report.json'), JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));
 } catch (error) { console.error(error.message); process.exitCode = 1; }

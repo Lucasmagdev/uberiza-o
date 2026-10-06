@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DEFAULTS, STEPS, REFERENCES, PROFILES, calculate, normalizeInputs, normalizeState, initialState, hours } from '../public/engine.js';
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`);
-test('all 27 scenarios separate total time, earnings, fuel and net hourly balance', () => {
+test('all 54 Uber and 99 scenarios separate total time, earnings, fuel and net hourly balance', () => {
   let count = 0;
-  for (const a of STEPS[0].options) for (const b of STEPS[1].options) for (const c of STEPS[2].options) {
+  for (const platform of ['uber', '99']) for (const a of STEPS[0].options) for (const b of STEPS[1].options) for (const c of STEPS[2].options) {
     const inputs = { ...DEFAULTS, hours: a.value, idlePercent: b.value, km: c.value };
-    const r = calculate(inputs);
+    const r = calculate(inputs, platform);
+    assert.equal(r.platform, platform);
     close(r.activeHours + r.idleHours, inputs.hours);
     close(r.income, inputs.hours * (1 - inputs.idlePercent / 100) * 47);
     close(r.fuel, inputs.km / 13.5 * 6.42);
@@ -15,7 +16,7 @@ test('all 27 scenarios separate total time, earnings, fuel and net hourly balanc
     assert.ok(r.perHour < 47);
     count++;
   }
-  assert.equal(count, 27);
+  assert.equal(count, 54);
 });
 test('BH reference scenario is R$300.80 minus R$85.60, with all eight hours counted', () => {
   const r = calculate();
@@ -72,6 +73,9 @@ test('fresh platform selection isolates car and motorcycle inputs, with safe mod
   uber.inputs.actualIncome = 800; uber.inputs.efficiency = 8;
   assert.equal(ifood.inputs.actualIncome, null); assert.equal(ifood.inputs.efficiency, 55.3);
   assert.equal(initialState('uber').inputs.actualIncome, null);
+  assert.equal(initialState('99').inputs.actualIncome, null);
+  assert.equal(initialState('99').platform, '99');
+  assert.equal(normalizeState({ ...initialState('99'), phase: 'result', completed: 3 }).platform, '99');
   assert.deepEqual(normalizeInputs(null, 'ifood'), PROFILES.ifood.defaults);
   assert.equal(normalizeInputs({ deliveries: -5, efficiency: 0 }, 'ifood').deliveries, 0);
   assert.equal(normalizeInputs({ deliveries: 18.5 }, 'ifood').deliveries, 18);

@@ -1,8 +1,12 @@
 # Seu Próprio Chefe?
 
-Jogo educativo e materiais de uma apresentação sobre uberização e plataformização do trabalho no Brasil. No início, escolha entre motorista da Uber e motoboy do iFood em Belo Horizonte. Cada módulo tem três escolhas e uma conta própria para carro ou moto.
+Jogo educativo e materiais de uma apresentação sobre uberização e plataformização do trabalho no Brasil. No início, escolha entre motorista da Uber, motorista da 99 e motoboy do iFood em Belo Horizonte. Cada módulo tem três escolhas e uma conta própria para carro ou moto.
 
 O jogo é feito em HTML, CSS e JavaScript. A tela final mostra **entrou − custos = ficou**, com opção de usar os valores reais do trabalhador. As referências são ANP, Inmetro, Cebrap/Amobitec, iFood e Yamaha, com datas e limites explicados em [Fontes dos valores](output/FONTES-DOS-VALORES.md). A base conceitual é o artigo de Abílio, Amorim e Grohmann (2021).
+
+**Jogar online:** https://lucasmagdev.github.io/uberiza-o/
+
+O GitHub Pages publica a pasta `docs` da branch `main`. Antes de enviar mudanças do jogo, execute `npm test` e `npm run build` em `app`: o build atualiza `docs`, o pacote do site e o HTML offline. Envie também os arquivos gerados em `docs`; o Pages atualizará o endereço. Os links temporários antigos do Netlify não acompanham os commits.
 
 ## Rodar localmente
 
@@ -35,15 +39,15 @@ O comando de build também cria `output/JOGAR-SEM-INTERNET.html`. Abra esse arqu
 
 ## Usar com a turma
 
-1. Escolha **Uber** ou **iFood**, selecione **Jogar com a turma** e projete a tela.
-2. Ouça a sala e escolha jornada, espera e distância na Uber, ou jornada, entregas e distância no iFood.
+1. Escolha **Uber**, **99** ou **iFood**, selecione **Jogar com a turma** e projete a tela.
+2. Ouça a sala e escolha jornada, espera e distância na Uber/99, ou jornada, entregas e distância no iFood.
 3. Compare os ganhos, o combustível e o valor após os custos informados.
 4. Em **Usar meus valores**, na prévia ou no resultado, informe o repasse e os custos do trabalhador.
 5. Explore as provocações sobre autonomia, tempo, custos e proteção.
 
-Cada navegador tem uma partida independente. O apresentador clica após ouvir a sala. **Recarregar a página começa tudo de novo**, voltando à escolha entre Uber e iFood. Não recuperamos escolhas nem saldos de partidas anteriores. A prévia lateral é recalculada a cada escolha e ao aplicar novos valores.
+Cada navegador tem uma partida independente. O apresentador clica após ouvir a sala. **Recarregar a página começa tudo de novo**, voltando à escolha entre Uber, 99 e iFood. Não recuperamos escolhas nem saldos de partidas anteriores. A prévia lateral é recalculada a cada escolha e ao aplicar novos valores.
 
-Na Uber, os ganhos iniciais usam uma referência nacional histórica por hora **em corrida**, sem remunerar a espera. No iFood, multiplicamos as entregas concluídas por uma base ajustável de R$ 7,50, anunciada para rotas de moto ou carro com início em junho/2025. Cada entrega da simulação é uma rota simples com um pedido; pedidos agrupados e programas de ganho por período não são reproduzidos. Distância, gorjetas e adicionais não são somados automaticamente à receita.
+Na Uber e na 99, os ganhos iniciais usam uma referência nacional histórica por hora **em corrida**, sem remunerar a espera. No iFood, multiplicamos as entregas concluídas por uma base ajustável de R$ 7,50, anunciada para rotas de moto ou carro com início em junho/2025. Cada entrega da simulação é uma rota simples com um pedido; pedidos agrupados e programas de ganho por período não são reproduzidos. Distância, gorjetas e adicionais não são somados automaticamente à receita.
 
 O preço do combustível é de BH. Os consumos iniciais são de testes controlados: Onix MT 1.0 para carro, Yamaha Factor 150 para moto. Outros custos começam em zero e a tela avisa que o valor após gasolina ainda não é lucro completo. O repasse real substitui a estimativa, inclusive quando é zero. Nenhuma taxa da plataforma é descontada novamente.
 
@@ -69,7 +73,7 @@ Com o servidor ativo, execute em outro terminal:
 node scripts/browser-check.mjs
 ```
 
-Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` aceita uma URL como argumento para verificar uma publicação. Os oito testes de cálculo cobrem 54 combinações, valores recebidos reais, despesas adicionais, espera, resultados negativos e isolamento entre módulos. A verificação de interface inclui a escolha de plataforma, prévia, formulário, reinício ao recarregar, teclado, tela cheia e os dois módulos offline. Os comandos antigos `interface-check` e `improvements-check` chamam a verificação consolidada.
+Os testes de navegador usam o Chrome instalado no caminho padrão do Windows. `browser-check` aceita uma URL como argumento para verificar uma publicação. Os oito testes de cálculo cobrem 81 combinações, valores recebidos reais, despesas adicionais, espera, resultados negativos e isolamento entre módulos. A verificação de interface inclui a escolha de plataforma, prévia, formulário, reinício ao recarregar, teclado, tela cheia e os três aplicativos offline. Os comandos antigos `interface-check` e `improvements-check` chamam a verificação consolidada.
 
 `scripts/artifact-check.mjs` verifica os arquivos de uma publicação registrada localmente em `app/.netlify/deployment.json`. Esse registro e suas credenciais são privados e não fazem parte do repositório.
 

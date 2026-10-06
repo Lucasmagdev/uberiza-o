@@ -1,15 +1,15 @@
-SEU PRÓPRIO CHEFE? — UBER OU IFOOD EM BELO HORIZONTE
+SEU PRÓPRIO CHEFE? — UBER, 99 OU IFOOD EM BELO HORIZONTE
 
 COMO JOGAR
-1. Escolha Uber (carro) ou iFood (moto). Clique em Jogar com a turma ou Jogar sozinho.
-2. Uber: horas no aplicativo, tempo sem corrida e quilômetros totais.
+1. Escolha Uber (carro), 99 (carro) ou iFood (moto). Clique em Jogar com a turma ou Jogar sozinho.
+2. Uber/99: horas no aplicativo, tempo sem corrida e quilômetros totais.
    iFood: horas no aplicativo, entregas concluídas e quilômetros totais.
 3. Veja a conta: entrou, saiu em custos e ficou para você.
 4. Use Usar meus valores, na prévia ou no resultado, para informar ganhos e despesas.
 5. Abra os temas Autonomia, Tempo, Custos e Proteção para debater.
 Cada escolha avança automaticamente. As teclas 1, 2 e 3 também escolhem.
 Projete e ouça a sala antes de clicar. Cada navegador tem seu próprio jogo.
-Recarregar a página começa tudo de novo, voltando à escolha Uber/iFood.
+Recarregar a página começa tudo de novo, voltando à escolha Uber/99/iFood.
 A prévia lateral muda com as escolhas e os valores aplicados. Não recuperamos
 saldos antigos nem escolhas de partidas anteriores.
 
@@ -20,7 +20,7 @@ Ganhos: R$ 47/h em viagem, referência nacional Cebrap/Amobitec com dados de
 maio/2023 a abril/2024. Já desconta a taxa do aplicativo. Não desconta o veículo.
 A pesquisa foi encomendada pela associação empresarial Amobitec.
 
-Na Uber, a espera reduz as horas que geram ganhos estimados.
+Na Uber/99, a espera reduz as horas que geram ganhos estimados.
 No iFood, entregas concluídas multiplicadas pelo valor por rota geram a estimativa.
 Cada entrega simulada corresponde a uma rota simples com um pedido, sem pedidos
 agrupados nem programas com ganho por período. Base ajustável: R$ 7,50 por rota,
@@ -33,13 +33,17 @@ convertidos automaticamente em quilômetros remunerados. Distância, gorjetas,
 promoções e adicionais não são somados automaticamente à receita do iFood.
 Os cenários não representam médias locais observadas.
 Os ganhos históricos não foram atualizados pela inflação, não são tarifa oficial
-da Uber e não garantem renda em BH. Use o repasse real quando disponível.
+da Uber ou da 99 e não garantem renda em BH. Use o repasse real quando disponível.
 Outros custos começam em zero; o resultado inicial é após gasolina, não lucro completo.
 O formulário permite informar manutenção, seguro, IPVA, aluguel, desgaste e outros.
 Não some a gasolina de novo nesses outros custos. A taxa do app não é descontada outra vez.
 Fontes, metodologia e links: ../output/FONTES-DOS-VALORES.md e botão Fontes no jogo.
 
 RODAR E PUBLICAR
+Online: https://lucasmagdev.github.io/uberiza-o/
+O GitHub Pages publica a pasta docs da main. Execute npm test e npm run build
+em app antes de enviar mudanças, incluindo os arquivos gerados em docs no commit.
+Os antigos links temporários do Netlify continuam na versão antiga.
 Na pasta app: npm ci, npm run build e npm start.
 Abra http://localhost:4173.
 No Windows, para iniciar em segundo plano:
@@ -54,8 +58,8 @@ VERIFICAR
   node scripts/browser-check.mjs
 O teste de navegador precisa do servidor local ativo e usa o Chrome no caminho
 padrão do Windows. Aceita uma URL para conferir uma publicação.
-Os oito testes de cálculo cobrem 54 combinações, precisão, tempo sem corrida,
+Os oito testes de cálculo cobrem 81 combinações, precisão, tempo sem corrida,
 repasse real, custos adicionais, zero recebido, prejuízo e isolamento dos módulos.
 A interface verifica seleção de plataforma, prévia, formulário, teclado,
 tela cheia, reinício ao recarregar, telas pequenas, cópia e funcionamento
-offline dos dois módulos sem requisições HTTP.
+offline dos três aplicativos sem requisições HTTP.
