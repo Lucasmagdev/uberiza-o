@@ -1,0 +1,19 @@
+# Dependências, builds e arquivos locais
+node_modules/
+dist/
+tmp/
+.netlify/
+.env
+.env.*
+*.log
+
+# Publicações temporárias e materiais gerados com dados de acesso
+/output/ACESSO-AO-JOGO.txt
+/output/VALIDACAO-DO-JOGO.txt
+/output/JOGAR-SEM-INTERNET.html
+/output/*.url
+/output/*.zip
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

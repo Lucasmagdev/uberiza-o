@@ -1,0 +1,646 @@
+ROADMAP DOS 16 SLIDES
+Uberização e plataformização do trabalho no Brasil
+
+PROPOSTA
+
+Versão de 16 slides: 13 para exposição e entrevista, 1 para os quatro debates,
+1 de conclusão e 1 de referências. Mantém-se a referência inicial de 50 minutos
+para ocupar quase toda a aula, com mais tempo de fala e participação em cada tema.
+
+Percurso: pessoa -> conceitos -> contexto brasileiro -> organização do trabalho
+-> tempo e renda -> autonomia e riscos -> resistência -> debate -> conclusão.
+
+Ideia central: escolhas individuais podem coexistir com controle empresarial.
+Para compreender essa relação, analise regras, jornada, remuneração, custos,
+riscos e capacidade de organização coletiva.
+
+BASE DA LEITURA
+
+ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael. Uberização e
+plataformização do trabalho no Brasil: conceitos, processos e formas.
+Sociologias, Porto Alegre, v. 23, n. 57, p. 26-56, maio-agosto 2021.
+DOI: https://doi.org/10.1590/15174522-116484
+
+O roteiro se baseia na leitura integral do PDF: resumos, introdução, três seções,
+considerações finais e referências. O arquivo tem 32 páginas; a última contém
+apenas cabeçalho. As páginas citadas seguem a numeração impressa: p. 39 do artigo
+é a página 14 do PDF. Para converter, subtraia 25.
+
+A entrevista ainda não tem respostas fornecidas. Preencha os colchetes com dados
+reais; nomes, jornadas e rendas mencionados como exemplos não são resultados.
+As falas sugeridas abaixo são propostas para o apresentador, não citações literais.
+
+======================================================================
+1. ROADMAP SLIDE A SLIDE
+======================================================================
+
+SLIDE 1 | A rotina de [pseudônimo]
+
+Objetivo: abrir com a experiência concreta do entregador.
+
+Na tela:
+  [X] horas dedicadas ao trabalho por dia.
+  [Y] dias trabalhados por semana.
+  R$ [Z] no mês após os custos informados.
+
+Visual: foto autorizada e os três dados em destaque. Identifique cidade, data
+e período de referência. Sem foto, os dados bastam.
+
+Fala e entrevista: conte brevemente como ele entrou nas entregas. Explique
+o que foi considerado na jornada e na renda. Inclua espera e deslocamentos
+necessários à atividade, conforme os dados levantados.
+
+Se a entrevista não estiver concluída, abra com "O que precisamos conhecer da
+rotina de um entregador?" e os campos jornada, renda e proteção como perguntas.
+Não exiba números inventados nem colchetes como se fossem resultados.
+
+Fonte: entrevista; contexto analítico, artigo, p. 27-31 e 40-42.
+Transição: "Com essa rotina em mente, quem controla o trabalho?"
+
+----------------------------------------------------------------------
+
+SLIDE 2 | Quem manda nesse trabalho?
+
+Objetivo: registrar a percepção inicial da turma.
+
+Na tela:
+  "Escolher quando se conectar significa controlar o próprio trabalho?"
+
+Visual: apenas a pergunta, em tamanho grande.
+
+Fala e participação: faça uma votação rápida: sim, em parte ou não. Ouça duas
+justificativas e registre o resultado para retomá-lo no slide 15. Use uma fala
+real sobre ser o próprio chefe, se ela estiver disponível.
+
+Não descarte vantagens da flexibilidade relatadas pelo entrevistado. Elas também
+fazem parte da experiência que a apresentação precisa compreender.
+
+Fonte: autogerenciamento subordinado, p. 39-41; percepção individual, entrevista.
+Transição: "Para analisar essa tensão, vamos distinguir dois processos."
+
+----------------------------------------------------------------------
+
+SLIDE 3 | Dois processos se cruzam
+
+Objetivo: explicar uberização e plataformização e aplicar a distinção às entregas.
+
+Na tela:
+  Uberização: gestão e controle do trabalho, com consolidação do trabalho sob demanda.
+  Plataformização: dependência de plataformas digitais para realizar o trabalho.
+
+Visual: duas definições lado a lado; o caso do entregador como exemplo de combinação.
+
+Fala: uberização ultrapassa a empresa Uber e pode ultrapassar as plataformas.
+Plataformização destaca a dependência de suas infraestruturas e mecanismos.
+No caso das entregas por aplicativo, trabalho sob demanda e dependência digital
+podem se combinar. Não use os conceitos como sinônimos.
+
+Entrevista: identifique quais plataformas ele utiliza e se também atende diretamente
+a estabelecimentos. Isso ajuda a observar quando a plataforma é necessária.
+
+Contextualize: o artigo de Abílio, Amorim e Grohmann, publicado em 2021, é uma
+discussão teórico-conceitual; não é uma pesquisa estatística nacional de entregadores.
+
+Fonte: p. 26-28 e 35-36.
+Transição: "Esses processos encontram um mercado de trabalho com história."
+
+----------------------------------------------------------------------
+
+SLIDE 4 | A informalidade vem de antes
+
+Objetivo: apresentar a perspectiva periférica e a informalização das regras.
+
+Na tela:
+  Estratégias de sobrevivência precedem os aplicativos.
+  As plataformas reorganizam formas de trabalho existentes.
+  A instabilidade também alcança jornada, distribuição e remuneração.
+
+Visual: trajetória real do entrevistado, se houver; sem dados, destaque as três ideias.
+
+Fala: o artigo parte da periferia para compreender permanências e transformações.
+Critica a importação automática de "economia dos bicos", que pode obscurecer
+trajetórias duradouras de sobrevivência. Sua tese é que elementos historicamente
+estruturantes da periferia podem se generalizar nas relações de trabalho.
+
+Distinga informalidade de informalização: o argumento vai além da condição
+contratual e trata também da perda de regras estáveis e acordadas sobre o trabalho.
+
+Entrevista: trabalhos anteriores, motivo de entrada nas entregas, outras atividades
+e previsibilidade das regras. Não suponha que as entregas sejam apenas renda extra.
+
+Fonte: p. 29-31 e 37-42.
+Transição: "Para localizar quem organiza essas regras, precisamos olhar para a empresa."
+
+----------------------------------------------------------------------
+
+SLIDE 5 | O controle fica concentrado
+
+Objetivo: explicar a empresa por trás da interface e a coordenação de pessoas dispersas.
+
+Na tela:
+  Trabalhadores distribuídos pela cidade.
+  Infraestrutura, dados e regras sob controle empresarial.
+  O aplicativo é a interface visível dessa organização.
+
+Visual: um diagrama simples com entregadores em locais diferentes ligados à
+mesma plataforma. É o principal esquema explicativo da apresentação.
+
+Fala: plataforma envolve empresa, software, infraestrutura, propriedade e governança.
+Para os autores, a dispersão dos trabalhadores não elimina a organização empresarial;
+o controle pode permanecer centralizado mesmo sem um local único de trabalho.
+
+Entrevista: quem informa o preço, como as entregas chegam e quais canais existem
+para discutir decisões? Separe o que o trabalhador sabe do que tenta deduzir.
+
+Fonte: p. 32-34, 36 e 39.
+Transição: "Como essa organização utiliza o tempo de quem trabalha?"
+
+----------------------------------------------------------------------
+
+SLIDE 6 | O trabalho funciona sob demanda
+
+Objetivo: explicar o trabalhador just-in-time e a rotina invisível.
+
+Na tela:
+  Disponibilidade para receber trabalho.
+  Espera e deslocamentos necessários à atividade.
+  Pagamento associado à tarefa realizada.
+
+Visual: faixa de um dia real, distinguindo entregas, espera e pausas. Use proporções
+apenas se houver durações; sem elas, identifique como esquema conceitual.
+
+Fala: o trabalhador just-in-time está disponível, mas seu trabalho é utilizado
+conforme a organização da demanda. O artigo discute o tempo que deixa de ser
+remunerado quando o pagamento se restringe à produção efetiva. Por isso, contar
+apenas o tempo de entrega pode esconder parte da rotina.
+
+Entrevista: quanto tempo trabalha, quanto espera, como a espera no estabelecimento
+é tratada e como decide permanecer ou parar? Não presuma as regras de cada aplicativo.
+
+Fonte: p. 28, 39-40 e 43.
+Transição: "O dinheiro recebido precisa cobrir quais despesas e quantas horas?"
+
+----------------------------------------------------------------------
+
+SLIDE 7 | O valor recebido não é o que sobra
+
+Objetivo: relacionar custos, renda e jornada.
+
+Na tela:
+  Recebido no período - despesas de trabalho
+  = renda após os custos informados.
+  Renda após custos / horas dedicadas = rendimento por hora.
+
+Visual: recebido, despesas e restante em barras, apenas com dados reais. Sem valores,
+mantenha as fórmulas e explique quais informações faltam.
+
+Fala: gasolina, manutenção e tributos proporcionais entram na conta. Comparar
+somente a receita ou a renda mensal esconde diferenças de custos e jornada.
+O cálculo por hora deve considerar o tempo de trabalho segundo o critério informado,
+incluindo espera e deslocamentos pertinentes.
+
+Entrevista: use o mesmo período para recebimento, despesas e horas. Identifique
+estimativas e custos não levantados. Se o recebido já desconta uma taxa da plataforma,
+não a subtraia novamente. Eventual depreciação estimada deve ficar separada dos
+desembolsos registrados. Não apresente uma conta incompleta como renda líquida definitiva.
+
+Fonte: p. 39-43 e 45-46, incluindo a nota 5; valores e cálculo, entrevista.
+Transição: "Quem administra essas despesas e as horas necessárias para fechar a conta?"
+
+----------------------------------------------------------------------
+
+SLIDE 8 | A autonomia depende das regras
+
+Objetivo: desenvolver o autogerenciamento subordinado.
+
+Na tela:
+  O trabalhador organiza horários e estratégias.
+  A plataforma organiza acesso, distribuição e preço do trabalho.
+  Autogerenciamento subordinado.
+
+Visual: fala real curta sobre uma escolha e um limite relatados pelo entrevistado.
+
+Fala: o conceito reconhece que o trabalhador precisa agir e se organizar.
+A questão é em quais condições ele faz isso. Gerir a própria jornada não significa
+ter poder equivalente sobre as regras do serviço. Inclua vantagens reais da
+flexibilidade quando relatadas, além de limitações e necessidades de renda.
+
+Entrevista: quais escolhas valoriza, o que depende do aplicativo e se consegue
+parar quando deseja? Pergunte também por que prefere ou permanece na atividade.
+
+Fonte: p. 40-42 e 46-47.
+Transição: "Parte dessas regras é administrada por sistemas automatizados."
+
+----------------------------------------------------------------------
+
+SLIDE 9 | Algoritmos aplicam regras da empresa
+
+Objetivo: reunir gerenciamento algorítmico, incentivos, bloqueios e contestação.
+
+Na tela:
+  Dados e instruções automatizam decisões.
+  Ranqueamentos, bonificações e punições podem organizar o trabalho.
+  Regras pouco claras dificultam a contestação.
+
+Visual: uma mensagem real autorizada e anonimizada ou a sequência de um episódio
+relatado. Sem registro, use uma pergunta sobre explicação e possibilidade de recurso.
+
+Fala: a automação é programada e gerida por pessoas e empresas. Não é necessário
+afirmar que toda decisão usa inteligência artificial ou que inexiste atuação humana
+para discutir o controle e sua responsabilização.
+
+Entrevista: investigue metas, bônus, recusas ou bloqueios. Separe ocorrência observada,
+motivo informado e interpretação do trabalhador. Menos pedidos após uma recusa
+não prova, sozinho, uma punição causada pela recusa.
+
+Gamificação é uma lente proposta para a apresentação. O artigo trata de ranqueamentos,
+bonificações e punições, sem comprovar o funcionamento de cada aplicativo específico.
+
+Fonte: p. 33-34, 39-40, 43 e 46-47.
+Transição: "As decisões sobre trabalho e renda se conectam à exposição a riscos."
+
+----------------------------------------------------------------------
+
+SLIDE 10 | Os riscos ultrapassam a entrega
+
+Objetivo: abordar acidente, afastamento, descanso e planejamento de futuro.
+
+Na tela:
+  Quem sustenta a renda durante um afastamento?
+  Como funcionam descanso e recuperação?
+  Qual suporte chega ao trabalhador na prática?
+
+Visual: trecho real sobre risco, apoio ou descanso. Se o entrevistado nunca precisou
+acionar suporte, indique isso em vez de presumir o resultado.
+
+Fala e entrevista: pergunte sobre acidente ou doença, continuidade da renda,
+apoio e vida fora do trabalho. Diferencie proteção anunciada, conhecimento do
+trabalhador e experiência efetiva de utilização. Não pressuponha ausência de seguro.
+
+Use os termos da pessoa para descrever cansaço ou preocupação, sem diagnosticar.
+O artigo analisa a responsabilização individual por saúde e sobrevivência;
+não mede transtornos mentais nem estima custos futuros em 20 ou 30 anos.
+Saúde mental e envelhecimento entram como questões de investigação e debate.
+
+Fonte: p. 40-42 e 47; experiência pessoal, entrevista.
+Transição: "Além da plataforma, clientes e estabelecimentos participam da rotina."
+
+----------------------------------------------------------------------
+
+SLIDE 11 | A entrega envolve outras relações
+
+Objetivo: incluir tratamento, espera, segurança e responsabilidade do consumidor.
+
+Na tela:
+  Prazos e espera fazem parte da experiência de trabalho.
+  O tratamento nos estabelecimentos e pelos clientes importa.
+  O preço ao consumidor não revela sozinho a remuneração do entregador.
+
+Visual: um relato real contextualizado, preservando identidades desnecessárias.
+
+Fala e entrevista: convide o trabalhador a contar uma situação difícil ou perigosa
+que queira compartilhar; não exija sua pior experiência. Experiências de respeito
+e apoio também ajudam a discutir propostas.
+
+Pergunte como exigências de rapidez e espera aparecem na prática. Frete grátis,
+sozinho, não demonstra quem financiou uma promoção ou quanto recebeu o entregador.
+A responsabilidade ética do consumidor é uma extensão para debate, não uma
+conclusão específica comprovada pelo artigo.
+
+Fonte de apoio: dinâmicas do consumo, p. 33; consumidores nas mobilizações, p. 48.
+O artigo não desenvolve uma pesquisa específica sobre humilhação nesses encontros.
+Transição: "O que muda nessa organização e o que ela conserva?"
+
+----------------------------------------------------------------------
+
+SLIDE 12 | Mudam técnicas, persistem controles
+
+Objetivo: apresentar a terceira seção do artigo e a questão da moto própria.
+
+Na tela:
+  Pagamento por tarefa retoma formas antigas de remuneração.
+  Tecnologias ampliam supervisão e coordenação do trabalho coletivo.
+  Possuir a moto não equivale a controlar a organização da produção.
+
+Visual: comparação entre instrumentos do trabalhador e infraestrutura e gestão
+controladas pela empresa. Evite uma cronologia de evolução tecnológica inevitável.
+
+Fala: os autores argumentam que a tecnologia atualiza formas de controle.
+A organização cooperativa-industrial combina trabalhos sob controle do capital,
+mesmo quando as pessoas produzem serviços e estão dispersas. Nesse sentido,
+"industrial" não se limita a estar dentro de uma fábrica.
+
+Na distinção adotada pelos autores, a moto é um meio de trabalho. Possuí-la
+não elimina a dependência das tecnologias e formas de gestão que coordenam
+o trabalho coletivo. Esse argumento sociológico não decide automaticamente
+o vínculo jurídico de uma pessoa ou plataforma.
+
+Fonte: p. 42-47, especialmente p. 43-46 e notas 4 e 5.
+Transição: "Os trabalhadores também criam respostas coletivas a essa organização."
+
+----------------------------------------------------------------------
+
+SLIDE 13 | Os entregadores também se organizam
+
+Objetivo: apresentar resistência e agência antes de discutir propostas.
+
+Na tela:
+  #BrequeDosApps durante a pandemia.
+  Reivindicações por condições mais justas.
+  Associações e alternativas sob controle dos trabalhadores.
+
+Visual: imagem histórica com origem e contexto corretos ou reivindicações descritas
+no texto. Uma foto de outro protesto não deve ser identificada como #BrequeDosApps.
+
+Fala: as mobilizações dão visibilidade ao trabalho e tornam reconhecíveis formas
+de controle. Nas considerações finais, os autores destacam demandas que não se
+encaixam facilmente na oposição formal/informal e disputas sobre proteção.
+
+Entrevista: pergunte se ele conversa com colegas sobre condições de trabalho,
+participa de grupos e qual mudança prioriza. Não o apresente como representante
+de toda a categoria ou de mobilizações das quais não participa.
+
+Fonte: formas de organização e alternativas, p. 45; resistência e regulação, p. 48-49.
+Transição: "Com esses conceitos e experiências, vamos discutir responsabilidades."
+
+----------------------------------------------------------------------
+
+SLIDE 14 | Quais responsabilidades vamos dividir?
+
+Objetivo: concentrar os quatro debates com tempo para participação.
+
+Na tela:
+  Autonomia e proteção.
+  Bloqueios e contestação.
+  Consumo e responsabilidade.
+  Saúde e futuro.
+
+Visual: quatro linhas; destaque verbalmente o tema discutido a cada momento.
+Não coloque todas as perguntas complementares na tela.
+
+Condução: reserve aproximadamente quatro minutos por tema. Apresente a pergunta,
+ouça perspectivas diferentes e peça uma proposta concreta, com responsável
+e efeito esperado. Solicite que usem um conceito do artigo ou um dado da entrevista.
+
+Perguntas principais:
+  A. Que proteção deve acompanhar a flexibilidade de horários?
+  B. Que explicação e possibilidade de revisão devem acompanhar um bloqueio?
+  C. Como dividir responsabilidades entre consumidores, empresas e poder público?
+  D. Como distribuir os custos de doença e afastamento relacionados ao trabalho?
+
+As fichas abaixo trazem argumentos e perguntas de aprofundamento. Se a discussão
+de um tema se estender, controle o tempo para que os demais também sejam abordados.
+
+Fonte de apoio: p. 33-34, 39-41, 45 e 47-49. As propostas serão exercícios da turma,
+não resultados demonstrados pelo artigo.
+
+----------------------------------------------------------------------
+
+SLIDE 15 | O que mudou na nossa leitura?
+
+Objetivo: retomar a abertura e transformar a discussão em uma síntese.
+
+Na tela:
+  Escolhas individuais convivem com regras empresariais.
+  Renda, tempo e riscos precisam ser analisados juntos.
+  Os trabalhadores também participam das respostas coletivas.
+
+Visual: uma fala real da entrevista ou "Quem decide, quem recebe e quem assume os riscos?".
+
+Fala sugerida: "Na leitura dos autores, a tecnologia reorganiza relações de trabalho
+e atualiza formas de controle. A experiência de [pseudônimo] ajuda a perguntar
+quais escolhas estão disponíveis, quais regras as condicionam e quais mudanças
+fazem diferença para quem trabalha." É uma paráfrase, não uma citação literal.
+
+Repita a votação do slide 2. Ouça quem mudou ou qualificou a resposta. Termine
+com uma mudança prioritária e com quem deveria colocá-la em prática.
+
+Fonte: p. 40-42, 43-47 e 48-49; experiência individual, entrevista.
+
+----------------------------------------------------------------------
+
+SLIDE 16 | Fontes e contexto
+
+Objetivo: identificar de onde vêm conceitos, dados e imagens.
+
+Na tela:
+  ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael.
+  Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas.
+  Sociologias, v. 23, n. 57, p. 26-56, 2021.
+  https://doi.org/10.1590/15174522-116484
+
+  Entrevista com [pseudônimo], [cidade], [data]; dados relativos a [período].
+  [Fontes das imagens utilizadas.]
+
+Notas: o artigo é de 2021. Suas referências legislativas, incluindo o PL 3748/2020,
+pertencem ao contexto daquela discussão e não devem ser apresentadas como norma
+vigente. A situação legal atual exige atualização em fontes oficiais.
+
+Não apresente a entrevista como pesquisa representativa da categoria. Não liste
+como leitura direta obras conhecidas apenas pelas citações do artigo.
+Nos slides analíticos, use autores, ano e páginas em rodapés curtos; nos dados,
+identifique a entrevista e o período. Deixe o detalhamento nas notas.
+
+======================================================================
+2. FICHAS DOS QUATRO DEBATES
+======================================================================
+
+A. AUTONOMIA E PROTEÇÃO
+
+Pergunta: "Que proteção deve acompanhar a flexibilidade de horários?"
+
+Uma perspectiva destaca o valor de combinar atividades e compromissos.
+Outra destaca renda previsível e proteção em afastamentos. A turma pode discutir
+como essas necessidades se combinam, sem tratá-las como incompatíveis por definição.
+
+Aprofundamento: "Como preservar escolhas e repartir melhor os riscos? Quais custos
+e efeitos precisariam ser investigados?"
+
+Evite reduzir a discussão a "CLT ou ausência de direitos". Saída de empresas e
+redução de oportunidades são hipóteses a examinar, não consequências inevitáveis
+demonstradas pelo texto. Prefira analisar exploração e subordinação a usar
+"escravidão moderna" como explicação pronta.
+Base: p. 39-42 e 48-49.
+
+B. BLOQUEIOS E CONTESTAÇÃO
+
+Pergunta: "Que explicação e possibilidade de revisão devem acompanhar um bloqueio?"
+
+Explore o interesse empresarial em qualidade e segurança e os efeitos da decisão
+sobre a renda. Use um episódio real do slide 9, se houver.
+
+Aprofundamento: "Que motivo deve ser informado? Quem revisa? Como o trabalhador
+apresenta sua versão? Como avaliar se o canal funciona?"
+
+O 'chefe invisível' é uma imagem para discutir controle. O algoritmo pertence
+a uma organização empresarial e não deve aparecer como agente sem responsáveis.
+Uma revisão humana também precisa ser avaliada pela sua efetividade.
+Base: p. 33-34 e 39.
+
+C. CONSUMO E RESPONSABILIDADE
+
+Pergunta: "Como dividir responsabilidades entre consumidores, empresas e poder público?"
+
+Explore escolhas, tratamento e exigências de rapidez. Considere também restrições
+de renda e acesso à informação: consumidores não controlam sozinhos as regras.
+
+Aprofundamento: "Que atitudes individuais ajudam? Quais mudanças exigem regras
+empresariais ou políticas públicas? Como saber quem financiou uma promoção?"
+
+Não conclua que frete grátis sempre é pago pelo entregador ou que todo consumidor
+seja cúmplice. A avaliação ética é uma extensão proposta para o debate, apoiada
+indiretamente pelo artigo.
+Base: p. 33 e 48; experiência concreta, entrevista.
+
+D. SAÚDE E FUTURO
+
+Pergunta: "Como distribuir os custos de doença e afastamento relacionados ao trabalho?"
+
+Retome descanso, suporte e preocupações relatados. Discuta responsabilidades
+empresariais, proteção pública e condições de organização do trabalhador.
+
+Aprofundamento: "Que proteção faria diferença agora? Que dados seriam necessários
+para avaliar efeitos sobre saúde e envelhecimento ao longo do tempo?"
+
+O texto não demonstra adoecimento de toda uma geração, ausência universal de
+aposentadoria ou custos futuros de saúde pública. Mantenha essas preocupações
+como questões, sem transformar o depoimento em previsão populacional.
+Base: p. 40-41 e 47.
+
+======================================================================
+3. COMO SUA COLETA ENTRA NOS SLIDES
+======================================================================
+
+Próprio chefe -> slides 2 e 8; debate A; retomada no 15.
+  Conceito: autogerenciamento subordinado, p. 39-42 e 46-47.
+
+Gamificação e algoritmo -> slide 9; debate B.
+  Conceitos: gerenciamento algorítmico e informalização das regras, p. 33-34 e 39.
+
+Riscos e segurança -> slide 10; debate D.
+  Conceitos: transferência de riscos e gestão da sobrevivência, p. 40-41 e 47.
+
+Rotina invisível -> slides 1, 6 e 7.
+  Conceitos: trabalhador just-in-time, remuneração por tarefa e transferência
+  de custos, p. 39-43 e 45-46.
+
+Clientes e estabelecimentos -> slide 11; debate C.
+  Apoio indireto: dinâmicas do consumo, p. 33, e mobilizações, p. 48.
+
+Perguntas adicionais úteis:
+  Trajetória profissional e entrada na atividade -> slides 1 e 4.
+  Descanso e planejamento -> slide 10.
+  Apoio entre colegas e mudanças prioritárias -> slide 13.
+
+======================================================================
+4. ENTREVISTA: PERGUNTAS E DADOS A COMPLETAR
+======================================================================
+
+1. "Como você começou nas entregas e como costuma ser um dia de trabalho?"
+   Registre cidade, plataformas, tempo na atividade e trabalhos anteriores.
+
+2. "Quais decisões consegue tomar e quais dependem do aplicativo?"
+   Pergunte sobre horário, pausas, região, remuneração e vantagens valorizadas.
+
+3. "O que acontece quando recusa uma entrega ou encerra o dia?"
+   Peça caso concreto, mensagens, explicações e tentativas de contestação.
+
+4. "Em uma semana ou mês típico, quanto tempo dedica ao trabalho, quanto recebe
+   e quais despesas paga para trabalhar?"
+   Separe entregas, espera e deslocamentos; pergunte qual rendimento considera justo.
+
+5. "Se precisar parar por acidente ou doença, com que apoio pode contar?"
+   Diferencie oferta anunciada, conhecimento e utilização efetiva.
+
+6. "Como é o tratamento de clientes e estabelecimentos? Há uma situação difícil
+   ou perigosa que queira contar?"
+   Preserve o contexto e ouça também experiências positivas.
+
+7. "Como a rotina interfere no descanso, na vida pessoal e nos seus planos?"
+   Use a descrição da pessoa, sem inferir diagnóstico.
+
+8. "Você troca informações com outros entregadores? O que deveria mudar primeiro?"
+   Investigue apoio, grupos e prioridades sem presumir participação em mobilizações.
+
+Combine a identificação desejada e os trechos de nome, imagem ou áudio autorizados.
+Identifique pseudônimos. Uma frase literal reproduz o que foi dito; uma interpretação
+sua deve aparecer como paráfrase.
+
+Ficha mínima:
+  [Pseudônimo, cidade, data e período de referência]
+  [Plataformas, modalidade, trajetória e motivo de entrada]
+  [Jornada total, dias trabalhados e espera]
+  [Recebido, despesas e custos ainda não levantados]
+  [Escolhas valorizadas e limites relatados]
+  [Exemplo sobre metas, regras ou bloqueio, se houver]
+  [Suporte em afastamento e efeitos sobre descanso]
+  [Experiência com clientes e estabelecimentos]
+  [Apoio entre colegas e mudança prioritária]
+  [Trecho literal autorizado para abertura ou fechamento]
+
+======================================================================
+5. COBERTURA DO ARTIGO COMPLETO
+======================================================================
+
+Introdução, p. 27-31 -> slides 3-4 e 6.
+  Perspectiva periférica, trabalho sob demanda e permanências e transformações.
+
+Primeira seção, p. 32-38 -> slides 3-5 e 9.
+  Conceitos, limites de categorias importadas, infraestrutura, dispersão e controle.
+
+Segunda seção, p. 38-42 -> slides 4 e 6-10.
+  Informalização, trajetórias, trabalhador just-in-time e autogerenciamento subordinado.
+
+Terceira seção, p. 42-47 -> slides 7-10 e 12.
+  Pagamento por tarefa, cooperação industrial, instrumentos, gestão e riscos.
+
+Considerações finais, p. 48-49 -> slides 13-15.
+  Resistência, organização coletiva e disputas por proteção.
+
+Referências, p. 50-56 -> contexto bibliográfico; a fonte direta citada no slide 16
+é o artigo efetivamente lido, acompanhada da entrevista e dos materiais utilizados.
+
+Saúde mental, gamificação e responsabilidade ética do consumidor são desdobramentos
+propostos para investigação e debate. Diferencie o apoio direto do texto dessas
+extensões e das interpretações feitas a partir da entrevista.
+
+======================================================================
+6. TEMPO E MONTAGEM
+======================================================================
+
+Distribuição inicial para 50 minutos:
+  Slides 1-2   | Abertura e votação                  |  4 minutos
+  Slides 3-5   | Conceitos e contexto                |  7 minutos
+  Slides 6-7   | Jornada, custos e rendimento        |  5 minutos
+  Slides 8-11  | Autonomia, algoritmos e riscos      |  9 minutos
+  Slides 12-13 | Permanências e organização coletiva |  5 minutos
+  Slide 14     | Quatro debates                      | 16 minutos
+  Slide 15     | Síntese e retorno à votação         |  4 minutos
+  Slide 16     | Referências para consulta           | Sem leitura integral
+  TOTAL                                              | 50 minutos
+
+Cada tema do slide 14 recebe cerca de quatro minutos. O apresentador usa as
+fichas nas notas, sem precisar criar slides adicionais.
+
+Para 20 minutos: aproximadamente 14 de exposição nos slides 1-13, 5 de debate
+no slide 14 e 1 de conclusão. Escolha uma das quatro questões para aprofundar
+e deixe as demais para continuidade. Mantenha os mesmos 16 slides.
+
+Para 60 minutos: acrescente cinco minutos à discussão dos relatos e cinco aos
+debates, sem aumentar o número de slides.
+
+Orientação visual:
+  - Uma função principal por slide; explicações e perguntas complementares nas notas.
+  - Fundo claro, texto escuro e uma cor de destaque consistente.
+  - Título de abertura de pelo menos 50 pt; demais títulos de 35 pt; subtítulos
+    de 24 pt; corpo de pelo menos 16 pt, preferindo 20-24 pt na projeção.
+  - Encurte o texto antes de reduzir a fonte e evite títulos com quebra inesperada.
+  - Varie pergunta, definição, relato e dado, mantendo a mesma linguagem visual.
+  - Use o diagrama do slide 5 para explicar o mecanismo. Evite esquemas decorativos.
+  - Faça gráficos de jornada e renda apenas com valores reais e critérios informados.
+  - Identifique fontes e contexto das imagens e remova dados pessoais desnecessários.
+  - Diferencie conceito do artigo, dado da entrevista, interpretação e pergunta de debate.
+
+Resultado esperado: a turma deve conseguir distinguir uberização e plataformização,
+interpretar a rotina relatada e discutir propostas considerando tempo, renda,
+regras, riscos e organização coletiva.

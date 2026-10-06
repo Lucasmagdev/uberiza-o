@@ -1,0 +1,70 @@
+SEU PRÓPRIO CHEFE?
+
+Jogo educativo sobre um dia de entregas, com quatro decisões, conta detalhada,
+provocações e votação antes/depois. Todo o produto é frontend estático: HTML,
+CSS e JavaScript. O site não depende de serviços externos para funcionar.
+
+RODAR
+Para jogar sem internet e sem instalar nada, abra no navegador:
+  ../output/JOGAR-SEM-INTERNET.html
+Essa versão contém o jogo inteiro em um único arquivo e também pode ser enviada
+para os colegas. Ela é gerada do mesmo código da versão online em cada build.
+
+Na pasta app, execute:
+  npm start
+Abra http://localhost:4173.
+Para iniciar em segundo plano no Windows, execute pelo PowerShell:
+  powershell -ExecutionPolicy Bypass -File scripts/start-local.ps1
+
+PUBLICAR NO NETLIFY
+  npm run build
+A pasta dist é a versão pronta para publicar. O netlify.toml já configura
+o comando de build e a pasta de publicação. Também é possível enviar a pasta
+dist para https://app.netlify.com/drop.
+
+USAR NA AULA
+1. Abra o jogo e escolha "Conduzir com a turma".
+2. Use "Tela cheia" (ou F11 no navegador).
+3. Peça uma votação por mãos levantadas e registre as quantidades.
+4. Ouça a turma, selecione uma escolha e confirme cada uma das quatro rodadas.
+5. Leia as provocações ao revelar os resultados. As teclas 1–3 escolhem e
+   Enter confirma quando uma opção está selecionada.
+6. Na conta final, compare o afastamento com e sem apoio e explore os quatro
+   temas de debate.
+7. Registre a votação final e compare com o início.
+
+Cada navegador tem uma partida independente. O modo turma registra a votação
+manualmente no computador do apresentador; não há coleta simultânea de celulares.
+O progresso fica guardado apenas no navegador para poder continuar após recarregar.
+Se o navegador não permitir salvar, o jogo avisa e continua funcionando nessa aba.
+Ao compartilhar, o endereço pode ser selecionado manualmente se a cópia automática
+for bloqueada. Na versão offline, compartilhe o arquivo HTML.
+"Recomeçar" pede confirmação e apaga as escolhas e votações daquela partida.
+
+VALORES E CONCEITOS
+Todos os valores são fictícios, com regras visíveis antes das decisões. Não são
+dados reais do entregador entrevistado nem uma amostra estatística da categoria.
+O modelo separa receita, despesas de trabalho, saldo, jornada e proteção hipotética.
+As consequências não são aleatórias e não pressupõem punição por recusar entregas.
+
+Referência: ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael.
+Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas.
+Sociologias, v. 23, n. 57, p. 26-56, 2021.
+https://doi.org/10.1590/15174522-116484
+
+O jogo usa a análise sociológica do artigo, sem expor a legislação atual,
+diagnosticar saúde mental ou afirmar ausência universal de proteção.
+
+VERIFICAR
+  npm test
+  node scripts/browser-check.mjs
+  node scripts/interface-check.mjs
+  node scripts/improvements-check.mjs
+  node scripts/artifact-check.mjs
+O teste de navegador usa o Chrome instalado no Windows. O parâmetro opcional
+do script permite testar a versão publicada: node scripts/browser-check.mjs URL.
+O artifact-check confere os arquivos publicados e o download offline da publicação
+registrada em .netlify/deployment.json; esse arquivo de acesso fica só no computador.
+
+As dependências de desenvolvimento servem aos testes. O app publicado é composto
+apenas pelos seis arquivos estáticos de dist, incluindo a cópia offline.

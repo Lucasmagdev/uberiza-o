@@ -1,0 +1,263 @@
+Crie no Canva uma apresentação acadêmica totalmente editável, em português do Brasil, com EXATAMENTE 16 slides sobre Uberização e plataformização do trabalho no Brasil. Entregue os slides completos, com fotografias já escolhidas e inseridas, textos finais, diagramas e referências. A apresentação deve estar pronta para ser projetada em uma aula de aproximadamente 50 minutos, com exposição, conversa com um entregador de moto e participação da turma.
+
+Use a direção visual e o conteúdo definidos abaixo. As instruções de composição orientam o design e não devem aparecer como texto nos slides. A entrevista pode acontecer oralmente durante a aula. Nenhuma tela deve depender de informações que ainda precisam ser fornecidas.
+
+RESULTADO ESPERADO
+
+Uma apresentação com acabamento editorial: fotografias grandes, títulos fortes, espaço livre e composições variadas. O tema deve aparecer pela relação entre cidade, entregadores, tecnologia e condições de trabalho. Todo slide precisa parecer finalizado.
+
+Não inclua campos entre colchetes, espaços para nomes ou dados, molduras vazias, sugestões de imagens, instruções para o usuário completar, textos provisórios ou pedidos para adicionar conteúdo depois. Escolha e insira as fotografias durante a criação. Não acrescente slides além dos 16 especificados, nem uma segunda capa ou uma página de agradecimento.
+
+Textos, títulos, fórmulas, linhas e diagramas devem continuar editáveis. As fotografias devem ser elementos individuais que possam ser recortados ou substituídos. Não transforme o slide inteiro em uma imagem.
+
+LINGUAGEM
+
+Use exatamente os textos indicados para as telas, com pontuação simples e português natural. O tom é de uma aula universitária: claro, direto e preciso. Não use travessões nem meia-risca como pontuação, separadores ou marcadores. Prefira pontos, vírgulas, dois-pontos e quebras de linha. O sinal matemático de subtração pode aparecer nas fórmulas.
+
+Evite frases genéricas de apresentação, slogans publicitários, metáforas grandiosas e expressões como "na era digital", "em um mundo cada vez mais conectado", "uma jornada de transformação" ou "vamos mergulhar". Não adicione emojis, hashtags decorativas ou perguntas retóricas além das perguntas previstas. A hashtag #BrequeDosApps faz parte do conteúdo histórico do slide 13.
+
+DIREÇÃO DE ARTE
+
+Formato horizontal 16:9. Use uma estética de reportagem fotográfica e publicação acadêmica, com organização cuidadosa e leitura fácil na projeção.
+
+Paleta: grafite #171A1D, branco quente #F6F3ED, laranja queimado #C64B20 e cinza #63676B. O laranja destaca palavras, números de seção e relações nos diagramas. Reserve o grafite para os slides 1, 9, 13 e 15. Use branco quente nos demais. Mantenha contraste forte.
+
+Tipografia: Montserrat Semibold ou Bold nos títulos e Open Sans no corpo. Se essas fontes não estiverem disponíveis, escolha equivalentes sem serifa. Capa entre 54 e 64 pt. Títulos entre 36 e 44 pt. Corpo entre 24 e 28 pt. Referências, legendas e rodapés com pelo menos 16 pt. Ajuste as quebras de linha e a composição antes de reduzir qualquer fonte.
+
+Mantenha margens de aproximadamente 6% da tela, alinhamento consistente e espaço generoso entre os elementos. Use texto alinhado à esquerda, salvo nas perguntas centrais e na síntese. Evite parágrafos longos e texto justificado.
+
+Varie as composições: capa fotográfica, pergunta em destaque, definições em duas colunas, fotografia ocupando metade da tela, diagrama de rede, sequência de etapas, fórmulas e debate. Use linhas finas e formas simples somente quando ajudarem a explicar o conteúdo. Não repita uma grade de cartões em todos os slides. Evite sombras pesadas, excesso de caixas, efeitos 3D, robôs, cérebros digitais e ícones genéricos de tecnologia.
+
+Inclua numeração discreta de 1/16 a 16/16 no mesmo canto em todas as telas. Nos slides 2 a 15, use um rodapé com Abílio, Amorim e Grohmann (2021) e as páginas indicadas em cada slide. Escreva os intervalos de páginas por extenso, como "p. 39 a 41". O rodapé deve ter pouco peso visual e continuar legível.
+
+FOTOGRAFIAS JÁ INSERIDAS
+
+Inclua oito fotografias diferentes nos slides 1, 4, 6, 8, 10, 11, 12 e 15. Use fotografias reais da biblioteca do Canva ou de um banco de imagens com licença adequada para esse uso. Dê preferência a entregadores de moto, ruas brasileiras, espera diante de restaurantes, manutenção de motocicletas e relações de entrega. Procure termos como "motoboy Brasil", "entregador de moto", "motorcycle courier Brazil" e "delivery rider restaurant".
+
+Escolha imagens nítidas, com boa resolução para projeção, luz natural e enquadramento documental. Mantenha cores coerentes entre as fotos e preserve os tons de pele. Use recortes grandes, sem deformar os rostos, a moto ou os equipamentos. Nas imagens com texto sobreposto, aplique uma camada escura suave apenas na área necessária para garantir a leitura.
+
+Retrate os trabalhadores com respeito. Não use cenas de acidentes, sofrimento encenado, pessoas em situação humilhante ou uso do celular enquanto pilotam. Evite marcas em destaque e telas de aplicativos que pareçam comprovar regras específicas. Não substitua fotografias por ilustrações, imagens artificiais ou montagens de trabalhadores.
+
+As fotografias são ilustrativas. Não atribua a nenhuma pessoa fotografada uma entrevista, um depoimento, uma renda ou uma história pessoal. Informe o caráter ilustrativo na página de fontes. Registre nas notas os créditos reais disponíveis no catálogo de cada imagem, com autor e origem quando informados. Não invente créditos. Nunca deixe um espaço vazio destinado a uma foto.
+
+BASE ACADÊMICA
+
+Use a síntese conceitual deste prompt, baseada no artigo de Ludmila Costhek Abílio, Henrique Amorim e Rafael Grohmann, publicado em 2021. Preserve a distinção entre uberização, plataformização e autogerenciamento subordinado.
+
+O artigo é uma discussão conceitual. Não crie estatísticas, percentuais, salários, jornadas, valores de despesas, nomes de entrevistados ou falas atribuídas a trabalhadores. As fotografias não são evidências de uma entrevista. No slide de renda, apresente apenas as relações matemáticas, sem números inventados.
+
+Trate saúde mental, proteção e responsabilidade do consumidor como perguntas para discussão. Não apresente diagnósticos, previsões de gastos com saúde ou conclusões sobre toda a categoria. Metas, ranqueamentos, bonificações e bloqueios podem ser discutidos como mecanismos de gestão, sem afirmar que todos os aplicativos funcionam da mesma maneira. Não acrescente regras ou legislação atuais. Reconheça a flexibilidade valorizada pelos trabalhadores e sua capacidade de organização coletiva.
+
+CONTEÚDO E COMPOSIÇÃO DOS 16 SLIDES
+
+SLIDE 1: Uberização e plataformização do trabalho no Brasil
+
+Texto na tela:
+Uberização e plataformização do trabalho no Brasil
+Entregas por aplicativo, autonomia e condições de trabalho
+
+Composição: capa com uma fotografia real ocupando toda a tela. Escolha um entregador com moto em uma rua urbana, parado ou em uma situação segura. Posicione a pessoa à direita e o título à esquerda, em branco, com quebras de linha bem distribuídas. Destaque apenas a palavra Uberização em laranja. Use uma camada de grafite para melhorar a leitura. Não acrescente nome fictício, instituição, data ou números sobre uma pessoa.
+
+SLIDE 2: Quem manda nesse trabalho?
+
+Texto na tela:
+Escolher quando se conectar significa controlar o próprio trabalho?
+Sim, em parte ou não? Qual é a sua justificativa?
+
+Composição: fundo branco quente, pergunta central grande e área livre ao redor. Destaque "controlar o próprio trabalho" em laranja. O título funciona como identificação discreta no alto. A tela deve permitir uma votação inicial sem distrações.
+Fonte: p. 39 a 41.
+
+SLIDE 3: Dois processos se cruzam
+
+Texto na tela:
+Uberização
+Gestão e controle do trabalho sob demanda, com transferência de custos e riscos.
+
+Plataformização
+Dependência de plataformas digitais para realizar o trabalho.
+
+Nas entregas por aplicativo, os dois processos podem se combinar.
+
+Composição: duas colunas abertas, separadas por uma linha fina. Use os nomes dos conceitos como elementos principais e a frase de conexão abaixo. Não use fotos neste slide.
+Fonte: p. 26 a 28 e 35 a 36.
+Nota do apresentador: uberização ultrapassa a empresa Uber e pode ocorrer além das plataformas. Os conceitos não são sinônimos.
+
+SLIDE 4: A informalidade vem de antes
+
+Texto na tela:
+Estratégias de sobrevivência precedem os aplicativos.
+As plataformas reorganizam formas de trabalho existentes.
+A instabilidade alcança jornada, distribuição de tarefas e remuneração.
+
+Composição: fotografia documental de uma rua brasileira ocupando a metade esquerda. Na metade direita, título e três frases bem espaçadas, sem caixas. Não crie uma linha do tempo biográfica ou datas não fornecidas.
+Fonte: p. 29 a 31 e 37 a 42.
+Nota do apresentador: a perspectiva periférica é central ao artigo. Informalização também envolve a perda de regras estáveis de organização do trabalho.
+
+SLIDE 5: O controle fica concentrado
+
+Texto na tela:
+Trabalhadores distribuídos pela cidade.
+Dados, infraestrutura e regras sob controle empresarial.
+O aplicativo é a interface dessa organização.
+
+Rótulos do diagrama:
+Entregadores
+Plataforma
+Empresa, software e infraestrutura
+
+Composição: faça um diagrama editável com um núcleo central identificado como Plataforma e vários pontos externos identificados como Entregadores. Conecte-os com linhas finas. Destaque o núcleo em laranja. Use formas abstratas simples, sem retratos ou personagens. O esquema representa uma organização do trabalho, não uma localização geográfica real.
+Fonte: p. 32 a 34, 36 e 39.
+
+SLIDE 6: O trabalho funciona sob demanda
+
+Texto na tela:
+Disponibilidade para receber trabalho.
+Espera e deslocamentos necessários à atividade.
+Pagamento associado à tarefa realizada.
+
+Trabalhador just-in-time
+
+Composição: fotografia de um entregador parado junto à moto, esperando diante de um restaurante, no terço direito. No restante, organize os três momentos em uma sequência editável com setas simples. Dê destaque ao conceito final. Não use relógios, proporções ou durações inventadas.
+Fonte: p. 28, 39 a 40 e 43.
+Nota do apresentador: tempo disponível para o trabalho e tempo de execução de uma tarefa remunerada são dimensões diferentes da rotina.
+
+SLIDE 7: O valor recebido não é o que sobra
+
+Texto na tela:
+Recebido no período − despesas de trabalho = renda após custos informados
+
+Renda após custos ÷ horas dedicadas = rendimento por hora
+
+Combustível, manutenção e tributos proporcionais entram na conta.
+
+Composição: fundo branco quente, sem fotografia. Apresente a primeira fórmula em até três linhas, com os termos bem separados, e a segunda abaixo. Destaque o resultado da primeira em laranja. Use texto e sinais matemáticos editáveis. Não inclua valores de exemplo, tabelas vazias ou gráficos sem dados.
+Fonte: p. 39 a 43 e 45 a 46.
+Nota do apresentador: as grandezas devem corresponder ao mesmo período. Considere as horas dedicadas ao trabalho, incluindo a espera levantada na entrevista. Evite descontar duas vezes taxas já abatidas do valor recebido.
+
+SLIDE 8: A autonomia depende das regras
+
+Texto na tela:
+O trabalhador organiza horários e estratégias.
+A plataforma organiza acesso, distribuição de tarefas e remuneração.
+
+Autogerenciamento subordinado
+
+Composição: fotografia de um entregador parado, consultando o celular junto à moto, ocupando metade da tela. Na outra metade, organize as duas frases em blocos de texto abertos. Dê destaque ao conceito final, sem colocar uma frase fictícia na boca da pessoa fotografada.
+Fonte: p. 40 a 42 e 46 a 47.
+Nota do apresentador: a flexibilidade pode ser valorizada e coexistir com subordinação. Convide o entregador presente a comentar uma escolha de sua rotina e uma condição definida pela plataforma.
+
+SLIDE 9: Algoritmos aplicam regras da empresa
+
+Texto na tela:
+Dados e instruções automatizam decisões.
+Ranqueamentos, bonificações e punições podem organizar o trabalho.
+Regras pouco claras dificultam a contestação.
+
+Rótulos do esquema:
+Regras empresariais
+Sistema automatizado
+Organização do trabalho
+
+Composição: fundo grafite, texto branco e sequência editável em laranja. Use uma representação abstrata simples. Não use fotografias, robôs, códigos decorativos ou uma tela falsa de aplicativo.
+Fonte: p. 33 a 34, 39 a 40, 43 e 46 a 47.
+Nota do apresentador: pessoas e empresas programam e gerem os sistemas. Metas, recompensas e bloqueios devem ser investigados em casos concretos. Uma queda de pedidos após uma recusa, isoladamente, não comprova punição causada pela recusa.
+
+SLIDE 10: Os riscos ultrapassam a entrega
+
+Texto na tela:
+Quem sustenta a renda durante um afastamento?
+Como funcionam descanso e recuperação?
+Qual suporte chega ao trabalhador na prática?
+
+Composição: fotografia respeitosa de um entregador descansando, com a moto estacionada, ocupando metade da tela. Apresente as três perguntas na outra metade, com espaço entre elas. Não use imagens de acidentes ou dramatização visual.
+Fonte: p. 40 a 42 e 47.
+Nota do apresentador: diferencie suporte anunciado e experiência de acesso ao suporte. Converse sobre cansaço, segurança e descanso sem diagnosticar o entrevistado nem generalizar sua experiência.
+
+SLIDE 11: A entrega envolve outras relações
+
+Texto na tela:
+Prazos e espera fazem parte do trabalho.
+O tratamento por clientes e estabelecimentos importa.
+O preço ao consumidor não revela a remuneração do entregador.
+
+Composição: fotografia de uma retirada de pedido ou entrega em um estabelecimento, ocupando aproximadamente 45% da tela. Coloque as três frases ao lado, com destaque discreto para a última. Mostre uma relação cotidiana de trabalho, sem marcas dominando o enquadramento.
+Fonte de apoio: p. 33 e 48.
+Nota do apresentador: frete grátis não informa, sozinho, quem financiou uma promoção. A discussão sobre responsabilidade do consumidor é uma extensão proposta para a aula.
+
+SLIDE 12: Mudam técnicas, persistem controles
+
+Texto na tela:
+O pagamento por tarefa retoma formas antigas de remuneração.
+A tecnologia amplia a coordenação do trabalho coletivo.
+Possuir a moto não significa controlar a organização do trabalho.
+
+Rótulos da comparação:
+Instrumentos do trabalhador: moto, celular e equipamentos.
+Gestão empresarial: infraestrutura, dados e distribuição de tarefas.
+
+Composição: fotografia de manutenção de uma moto em uma faixa vertical à esquerda. Use o restante para uma comparação editável entre instrumentos do trabalhador e gestão empresarial, seguida da frase final em destaque. Mantenha hierarquia clara para evitar excesso de texto.
+Fonte: p. 42 a 47.
+Nota do apresentador: na interpretação dos autores, a organização cooperativa-industrial pode coordenar trabalhos dispersos e serviços, sem uma fábrica como local comum. O argumento é sociológico e não determina automaticamente um enquadramento jurídico.
+
+SLIDE 13: Os entregadores também se organizam
+
+Texto na tela:
+#BrequeDosApps
+Mobilizações durante a pandemia.
+Reivindicações por melhores condições de trabalho.
+Associações e alternativas sob controle dos trabalhadores.
+
+Composição: fundo grafite, hashtag grande em branco e laranja, três frases curtas abaixo. Use tipografia como elemento principal. Não use uma foto genérica para representar uma mobilização histórica específica. Valorize a ação coletiva dos trabalhadores.
+Fonte: p. 45 e 48 a 49.
+Nota do apresentador: não atribua ao entregador convidado participação em mobilizações sem que ele a confirme.
+
+SLIDE 14: Quais responsabilidades vamos dividir?
+
+Texto na tela:
+1. Que proteção acompanha a flexibilidade?
+2. Como contestar um bloqueio?
+3. Qual responsabilidade temos ao pedir?
+4. Quem assume os custos de doença e afastamento?
+
+Proponha uma mudança: quem faria e com qual efeito?
+
+Composição: fundo branco quente, quatro perguntas em linhas bem espaçadas e números em laranja. A frase final fica abaixo, separada por uma linha fina. Não use fotografias ou elementos que disputem a atenção com o debate.
+Fonte de apoio: p. 33 a 34, 39 a 41, 45 e 47 a 49.
+Nota do apresentador: reserve cerca de quatro minutos para cada tema. Inclua perspectivas de trabalhadores, empresas, consumidores e poder público. Proteção e flexibilidade podem ser discutidas em conjunto.
+
+SLIDE 15: O que mudou na nossa leitura?
+
+Texto na tela:
+Escolhas individuais convivem com regras empresariais.
+Renda, tempo e riscos precisam ser analisados juntos.
+Os trabalhadores participam das respostas coletivas.
+
+Quem decide, quem recebe e quem assume os riscos?
+
+Composição: fotografia diferente da capa, com entregador e paisagem urbana, em toda a tela. Use camada grafite para leitura. A pergunta final é o elemento principal, com as três frases menores acima. Retome a identidade visual da abertura e destaque "decide", "recebe" e "riscos" em laranja.
+Fonte: p. 40 a 42, 43 a 47 e 48 a 49.
+Nota do apresentador: repita oralmente a pergunta do slide 2 e ouça uma justificativa que mudou ou ficou mais precisa. Encerre o debate pedindo uma mudança prioritária e quem seria responsável por realizá-la.
+
+SLIDE 16: Fontes e contexto
+
+Texto na tela:
+ABÍLIO, Ludmila Costhek; AMORIM, Henrique; GROHMANN, Rafael. Uberização e plataformização do trabalho no Brasil: conceitos, processos e formas. Sociologias, Porto Alegre, v. 23, n. 57, p. 26-56, 2021.
+
+https://doi.org/10.1590/15174522-116484
+
+Base conceitual publicada em 2021.
+Fotografias ilustrativas. As pessoas retratadas não são identificadas como participantes da entrevista.
+
+Composição: fundo branco quente, referência completa em bloco legível, DOI abaixo e nota sobre as fotografias no fim. Preserve exatamente a autoria, o título do artigo e o DOI. Acrescente somente os créditos reais das imagens efetivamente usadas, quando disponíveis. Se forem extensos, distribua os créditos nas notas dos respectivos slides para preservar a leitura desta tela. Não inclua referência fictícia de entrevista.
+
+NOTAS PARA A AULA
+
+Se houver notas do apresentador, coloque nelas as explicações conceituais, os créditos das fotografias e as orientações de discussão. Essas notas devem estar completas, sem campos pendentes. Se o recurso não estiver disponível, mantenha os 16 slides e registre os créditos em texto discreto junto às fotos, sem transferir explicações longas para as telas.
+
+Distribuição de tempo apenas nas notas: slides 1 e 2, quatro minutos; slides 3 a 5, sete minutos; slides 6 e 7, cinco minutos; slides 8 a 11, nove minutos; slides 12 e 13, cinco minutos; slide 14, dezesseis minutos; slide 15, quatro minutos. O slide 16 fica disponível para consulta. Não mostre tempos nos slides.
+
+REVISÃO ANTES DE ENTREGAR
+
+Confira o total exato de 16 slides e a ordem indicada. Verifique se as oito fotografias estão inseridas, com recortes adequados e coerência de cores. Revise legibilidade na projeção, contraste, alinhamento, margens, quebras de linha e numeração. Nenhum texto pode ficar cortado ou sobreposto.
+
+Confirme que não há campos para preencher, dados inventados, depoimentos fictícios, molduras vazias ou travessões. Verifique se os textos e diagramas continuam editáveis e se a referência está completa. Entregue a apresentação finalizada.
